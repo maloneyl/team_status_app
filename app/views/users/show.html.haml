@@ -1,4 +1,4 @@
-%h4= "#{@user.full_name}'s Groups"
+%h2= "#{@user.first_name}'s Groups"
 
 - @user.groups.each do |group|
   - if group.owner_id == @user.id
@@ -6,6 +6,17 @@
   - else
     = link_to "#{group.name} (Member)", group_path(group)
   %br/
+
+%p ***
+
+%h3 Recent Mentions
+- @mentions.each do |mention|
+  = "From: #{mention.user.full_name} (#{mention.user.username}) |"
+  = link_to "#{mention.group.name}", group_path(mention.group)
+  %br/
+  = mention.body
+
+%p ***
 
 %h3 Today So Far
 - @user.statuses.trackable.today.each do |status|

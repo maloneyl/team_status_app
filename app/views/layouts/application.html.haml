@@ -8,9 +8,9 @@
   %body
     %nav
       - if user_signed_in?
-        = "Hello, #{current_user.first_name}!"
+        = "Hello, #{current_user.first_name} (#{current_user.email})!"
         \|
-        = link_to 'My Groups', user_path(current_user)
+        = link_to 'Dashboard', user_path(current_user)
         \|
         = link_to 'Account Settings', edit_user_registration_path(current_user)
         \|

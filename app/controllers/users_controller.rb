@@ -11,6 +11,10 @@ class UsersController < Devise::RegistrationsController
 
   def show
     @user = User.find params[:id]
+    @mentions = []
+    Status.with_mention.each do |status|
+      @mentions << status if status.at_user == @user.username
+    end
   end
 
   def update

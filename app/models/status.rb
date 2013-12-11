@@ -15,4 +15,12 @@ class Status < ActiveRecord::Base
     where("tracking = ? OR duration > ?", true, 0) # EQUIVALENT TO: all(:conditions => ['tracking = ? OR duration >= ?', true, 0])
   end
 
+  def self.with_mention
+    where(['body LIKE ?', '@%'])
+  end
+
+  def at_user
+    body.scan(/(?<=^@)\w+(?=[\s|~])/).first # => "maloney" (example)
+  end
+
 end
