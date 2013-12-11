@@ -13,6 +13,8 @@ gem 'erb2haml' # then run: rake haml:replace_erbs
 
 gem 'devise'
 
+# gem 'cancan'
+
 gem 'carrierwave'
 gem 'fog', '~> 1.3.1'
 
@@ -29,8 +31,8 @@ end
 group :production, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'annotate'
   gem 'better_errors'
+  gem 'binding_of_caller'
 
   gem 'rspec-rails'
   gem 'database_cleaner'

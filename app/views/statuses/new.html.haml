@@ -1,0 +1,14 @@
+%h3 Add a Status
+
+= form_for([@group, @group.statuses.build], html: {id: 'status-form'}) do |f|
+  %fieldset
+    .field
+      = f.label :body, 'Message'
+      = f.text_area :body
+      %br/
+    .field
+      = f.label :tracking, 'Start timer?'
+      = f.check_box :tracking
+      %br/
+    .actions
+      = f.submit
