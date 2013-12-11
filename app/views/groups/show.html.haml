@@ -31,7 +31,7 @@
     \|
     %i= time_ago_in_words(message.created_at) + ' ago'
     %div.group-status-list-item-body
-      - if message.at_user == current_user.username
+      - if message.at_user == current_user.username || message.at_user == "all"
         %b= message.body
       - else
         = message.body

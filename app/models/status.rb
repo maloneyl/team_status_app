@@ -15,7 +15,7 @@ class Status < ActiveRecord::Base
     where("tracking = ? OR duration > ?", true, 0) # EQUIVALENT TO: all(:conditions => ['tracking = ? OR duration >= ?', true, 0])
   end
 
-  def self.with_mention
+  def self.with_mentions
     where(['body LIKE ?', '@%'])
   end
 

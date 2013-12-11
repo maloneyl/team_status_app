@@ -8,7 +8,7 @@
   %body
     %nav
       - if user_signed_in?
-        = "Hello, #{current_user.first_name} (#{current_user.email})!"
+        = "Hello, #{current_user.first_name} (#{current_user.email}; #{current_user.username})!"
         \|
         = link_to 'Dashboard', user_path(current_user)
         \|
