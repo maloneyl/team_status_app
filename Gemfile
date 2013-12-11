@@ -29,8 +29,8 @@ end
 group :production, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'annotate'
   gem 'better_errors'
+  gem 'binding_of_caller'
 
   gem 'rspec-rails'
   gem 'database_cleaner'

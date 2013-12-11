@@ -1,0 +1,13 @@
+%h4= "#{@user.full_name}'s Groups"
+
+- @user.groups.each do |group|
+  - if group.owner_id == @user.id
+    = link_to "#{group.name} (Admin)", group_path(group)
+  - else
+    = link_to "#{group.name} (Member)", group_path(group)
+  %br/
+
+- if @user == current_user
+  %p Join a group
+
+-

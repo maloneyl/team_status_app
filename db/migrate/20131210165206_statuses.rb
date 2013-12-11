@@ -8,6 +8,7 @@ class Statuses < ActiveRecord::Migration
       t.timestamps # :created_at, :modified_at
       t.belongs_to :user
       t.belongs_to :project
+      t.belongs_to :group
     end
   end
 
