@@ -13,6 +13,8 @@ gem 'erb2haml' # then run: rake haml:replace_erbs
 
 gem 'devise'
 
+# gem 'cancan'
+
 gem 'carrierwave'
 gem 'fog', '~> 1.3.1'
 

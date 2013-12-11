@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name, :username, :password, :password_confirmation, :remember_me
 
   has_and_belongs_to_many :groups
+  has_many :statuses
 
   def full_name
    "#{self.first_name} #{self.last_name}"
