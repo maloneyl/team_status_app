@@ -7,6 +7,14 @@
     = link_to "#{group.name} (Member)", group_path(group)
   %br/
 
+%h3 Today So Far
+- @user.statuses.trackable.today.each do |status|
+  %li= status.body
+  - if status.tracking?
+    = "(in progress)"
+  - else
+    = status.duration if status.duration? # need to figure out conversion and what to display
+
 - if @user == current_user
   %p Join a group
 
