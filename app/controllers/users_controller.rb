@@ -15,6 +15,7 @@ class UsersController < Devise::RegistrationsController
     Status.with_mentions.each do |status|
       @mentions << status if status.at_user == current_user.username || status.at_user == "all"
     end
+    @mentions = @mentions.sort_by(&:created_at).reverse
   end
 
   def update
