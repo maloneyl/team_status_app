@@ -1,0 +1,4 @@
+%h3 On Your Agenda
+
+- @user.agendas.today.each do |agenda|
+  %li= "#{agenda.body} | #{agenda.group.name}"
