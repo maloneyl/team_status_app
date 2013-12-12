@@ -1,16 +1,32 @@
 %h2= @group.name.titleize
 
-%h3 Members:
-- @group.users.each do |member|
+%h3 In This Group
+- @group_members.each do |member|
   = member.full_name
   = "(Admin)" if @group.owner_id == member.id
-  = "|" unless member == @group.users.last
+  = "|" unless member == @group_members.last
 
-%p ***
+%div.group-agenda
+  %p***
+  %h3 Today's Agenda
+  - if @is_group_member == true
+    = form_for([@group, @group.agendas.build], html: {id: 'agenda-form'}) do |f|
+      %fieldset
+        %legend You
+        .field
+          = f.text_area :body, :size => '80x3'
+          %br/
+        .actions
+          = f.submit
+
+  - @group_members.each do |member|
+    = member.full_name
+    - member.agendas.each do |agenda|
+      %li= agenda.body if agenda
 
 %h3 What is everyone up to?
 
-- if @group.users.where(:id => current_user.id).present?
+- if @is_group_member == true
   = form_for([@group, @group.statuses.build], html: {id: 'status-form'}) do |f|
     %fieldset
       %legend Add a Status
@@ -23,9 +39,8 @@
         %br/
       .actions
         = f.submit
-%p
 
-- @group.statuses(:created_at).reverse_order.each do |message|
+- @statuses.each do |message|
   %div.group-status-list-item
     = User.find(message.user_id).full_name
     \|
@@ -38,9 +53,9 @@
       %div.group-status-list-item-tracking
         - if message.user_id == current_user.id && message.tracking
           = link_to "Done? Stop timer", switch_tracking_group_status_path(@group, message), :method => :put
-    = "---" unless message == @group.statuses.first
+    = "---" unless message == @statuses.first
 
-- if @group.owner_id == current_user.id
+- if @is_owner == true
   %p ***
   %p Hello, admin! Update group / Add a member
 

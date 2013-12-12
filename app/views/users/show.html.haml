@@ -19,16 +19,28 @@
 
 %p ***
 
+%h3 On Your Agenda
+
+- @user.agendas.today.each do |agenda|
+  %li= "#{agenda.body} | #{agenda.group.name}"
+
+%p ***
+
 %h3 Today So Far
+
 - @user.statuses.trackable.today.each do |status|
-  %li= status.body
-  - if status.tracking?
-    - if status.duration == nil
-      = "#{distance_of_time_in_words(Time.now - status.created_at)} and counting"
+  %li
+    = status.body
+    \|
+    = link_to status.group.name, group_path(status.group)
+    \|
+    - if status.tracking?
+      - if status.duration == nil
+        = "#{distance_of_time_in_words(Time.now - status.created_at)} and counting"
+      - else
+        = "#{distance_of_time_in_words(Time.now.to_i - status.previously_updated_at.to_i + status.duration)} and counting"
     - else
-      = "#{distance_of_time_in_words(Time.now.to_i - status.previously_updated_at.to_i + status.duration)} and counting"
-  - else
-    = status.duration.seconds if status.duration? # need to figure out conversion and what to display
+      = distance_of_time_in_words(status.duration) if status.duration? # need to figure out conversion and what to display
 
 - if @user == current_user
   %p Join a group

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :groups
   has_many :statuses
+  has_many :agendas
 
   def full_name
    "#{self.first_name} #{self.last_name}"

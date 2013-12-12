@@ -10,6 +10,8 @@ TeamStatusApp::Application.routes.draw do
     resources :statuses do
       put 'switch_tracking', :on => :member
     end
+
+    resources :agendas
   end
 
   root :to => 'home#index'
