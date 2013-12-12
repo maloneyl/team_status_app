@@ -23,4 +23,11 @@ class Status < ActiveRecord::Base
     body.scan(/(?<=^@)\w+(?=[\s|~])/).first # => "maloney" (example)
   end
 
+  # def seconds_to_units(seconds)
+  #   '%d days, %d hours, %d minutes, %d seconds' % [24,60,60].reverse.inject([seconds]) do |result, unitsize| # the .reverse lets us put the larger units first for readability
+  #     result[0,0] = result.shift.divmod(unitsize)
+  #     result
+  #   end
+  # end
+
 end
