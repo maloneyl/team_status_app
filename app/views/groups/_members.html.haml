@@ -1,0 +1,6 @@
+%h3 In This Group
+%ul
+  %li= "#{@owner.full_name} (@#{@owner.username}) (Admin)"
+  - @members.each do |member|
+    - if member != @owner # can't move this to line below without extra space/line when false
+      %li= "#{member.full_name} (@#{member.username})"

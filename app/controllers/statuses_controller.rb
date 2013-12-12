@@ -15,6 +15,12 @@ class StatusesController < ApplicationController
     redirect_to group_path(@group_id)
   end
 
+  def destroy
+    @status = Status.find params[:id]
+    @status.destroy
+    redirect_to group_path(params[:group_id])
+  end
+
   def switch_tracking
     group = Group.find params[:group_id]
     status = Status.find params[:id]
