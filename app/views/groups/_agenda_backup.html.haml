@@ -1,0 +1,16 @@
+%div.group-agenda
+  %h3 Today's Agenda
+  - if @is_member == true
+    = form_for([@group, @group.agendas.build], html: {id: 'agenda-form'}) do |f|
+      %fieldset
+        %legend You
+        .field
+          = f.text_area :body, :size => '80x3'
+          %br/
+        .actions
+          = f.submit
+
+  - @members.each do |member|
+    = member.full_name
+    - member.agendas.each do |agenda|
+      %li= agenda.body if agenda

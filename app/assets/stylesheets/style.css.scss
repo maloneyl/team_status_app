@@ -1,3 +1,16 @@
-.group-status-list-item-body {
-  font-size: 16px;
+h2, h3 {
+  font-family: 'Source Sans Pro';
+}
+
+body {
+  font-family: 'Cambria';
+}
+
+.group-status-list-item {
+  margin-bottom: 10px;
+}
+
+.group-status-list-item-body-mention {
+  background-color: blue;
+  color: white;
 }

@@ -1,15 +1,13 @@
 %h3 Today So Far
 
+= bar_chart @user.statuses.trackable.group(:body).sum(:duration)
+/ = pie_chart @user.statuses.tracakble.group(:body).count
+
 - @user.statuses.trackable.today.each do |status|
   %li
     = status.body
     \|
     = link_to status.group.name, group_path(status.group)
     \|
-    - if status.tracking?
-      - if status.duration == nil
-        = "#{distance_of_time_in_words(Time.now - status.created_at)} and counting"
-      - else
-        = "#{distance_of_time_in_words(Time.now.to_i - status.previously_updated_at.to_i + status.duration)} and counting"
-    - else
-      = distance_of_time_in_words(status.duration) if status.duration? # need to figure out conversion and what to display
+    = distance_of_time_in_words(status.duration)
+    = "and counting" if status.tracking?

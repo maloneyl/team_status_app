@@ -1,6 +1,6 @@
 %h3 What is everyone up to?
 
-= form_for([@group, @group.statuses.build], html: {id: 'status-form'}) do |f|
+= form_for([@group, @group.statuses.build], :html => {id: 'new_status'}, :remote => true) do |f|
   %fieldset
     %legend Add a Status
     .field
@@ -15,19 +15,21 @@
 
 %p
 
-- @statuses.each do |message|
-  %div.group-status-list-item
-    = message.user.full_name
-    \|
-    %i= time_ago_in_words(message.created_at) + ' ago'
-    %div.group-status-list-item-body
+%div.group-statuses-list
+  - @statuses.each do |message|
+    %div.group-status-list-item
+      = message.user.full_name
+      \|
+      %i= time_ago_in_words(message.created_at) + ' ago'
       - if message.at_user == current_user.username || message.at_user == "all"
-        %b= message.body
+        %div.group-status-list-item-body-mention
+          = message.body
       - else
-        = message.body
+        %div.group-status-list-item-body-regular
+          = message.body
       %div.group-status-list-item-tracking
         - if message.user_id == current_user.id && message.tracking
           = link_to "Done? Stop timer", switch_tracking_group_status_path(@group, message), :method => :put
       - if message.user_id == current_user.id
-        = link_to "Delete", [@group, message], :method => :delete, :confirm => "Are you sure?"
-  %br/
+        = link_to "Delete", [@group, message], :remote => true, :method => :delete, :confirm => "Are you sure?"
+    %br/

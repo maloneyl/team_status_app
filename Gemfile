@@ -15,10 +15,14 @@ gem 'devise'
 
 # gem 'cancan'
 
+gem 'chartkick'
+
 gem 'carrierwave'
 gem 'fog', '~> 1.3.1'
 
 gem 'will_paginate', '~> 3.0'
+
+gem 'best_in_place'
 
 # Gems used only for assets and not required
 # in production environments by default.

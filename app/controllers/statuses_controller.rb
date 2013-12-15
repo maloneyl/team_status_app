@@ -10,15 +10,30 @@ class StatusesController < ApplicationController
     @status = Status.new params[:status]
     @status.group_id = @group_id
     @status.user_id = current_user.id
-    @status.save!
-    # reminder: need to add logic to prevent more than one 'tracking' status
-    redirect_to group_path(@group_id)
+    # @status.save!
+    # # reminder: need to add logic to prevent more than one 'tracking' status
+    # redirect_to group_path(@group_id)
+
+    respond_to do |format|
+      if @status.save
+        format.html { redirect_to group_path(@group_id), notice: 'Success!' }
+        format.js   {}
+        # format.json { render json: @status, status: :created, location: group_path(@group_id) }
+        format.json { render json: {'status' => 'ok'}.to_json }
+      else
+        format.html { render action: "new" }
+        # format.json { render json: @status.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     @status = Status.find params[:id]
     @status.destroy
-    redirect_to group_path(params[:group_id])
+    # redirect_to group_path(params[:group_id])
+
+    output = {'status' => 'ok'}.to_json
+    render json: output
   end
 
   def switch_tracking

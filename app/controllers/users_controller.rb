@@ -2,9 +2,6 @@ class UsersController < Devise::RegistrationsController
 
   def create
     super
-    # @user.first_name = params[:user][:first_name]
-    # @user.last_name = params[:user][:last_name]
-    # @user.username = params[:user][:username]
     @user.role = "member"
     @user.save!
   end
@@ -18,15 +15,27 @@ class UsersController < Devise::RegistrationsController
         @mentions << status if status.at_user == current_user.username || status.at_user == "all"
       end
       @mentions = @mentions.sort_by(&:created_at).reverse
+
+      @agendas = current_user.agendas # .today
+
+      # update duration
+      @user.statuses.trackable.today.each do |status|
+        if status.tracking?
+          if status.duration.present?
+            status.duration += (Time.now - status.previously_updated_at).to_i
+          else
+            status.duration = (Time.now - status.created_at).to_i
+          end
+          status.save!
+          status.previously_updated_at = status.updated_at
+          status.save!
+        end
+      end
     end
   end
 
   def update
     super
-    # @user.first_name = params[:user][:first_name]
-    # @user.last_name = params[:user][:last_name]
-    # @user.username = params[:user][:username]
-    # @user.image = params[:user][:image]
     @user.save!
   end
 
