@@ -17,7 +17,7 @@ class Status < ActiveRecord::Base
         duration_to_add = 0
       end
       Duration.create!(:status_id => self.id, :time_elapsed => duration_to_add)
-
+    end
   end
 
   def self.today

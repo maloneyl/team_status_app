@@ -18,17 +18,24 @@ class UsersController < Devise::RegistrationsController
 
       @agendas = current_user.agendas # .today
 
-      # update duration
+      # update duration if tracking
       @user.statuses.trackable.today.each do |status|
         if status.tracking?
-          # if status.duration.present?
+          if status.durations.last.present?
           #   status.duration += (Time.now - status.previously_updated_at).to_i
           # else
           #   status.duration = (Time.now - status.created_at).to_i
           # end
+            status.time_tracked = status.durations.today.sum(:time_elapsed) + (Time.now - status.durations.today.last.updated_at).to_i
+          else
+            status.time_tracked = (Time.now - status.durations.today.last.updated_at).to_i
+          end
           status.save!
-          status.time_tracked = status.durations.sum(:time_elapsed) + (Time.now - status.durations.updated_at).to_i
         end
+      end
+
+      @user.statuses.trackable.yesterday.each do |status|
+        status.time_tracked = status.durations.yesterday.sum(:time_elapsed)
       end
     end
   end
