@@ -1,3 +1,5 @@
+require 'json'
+
 class StatusesController < ApplicationController
 
   def new
@@ -10,26 +12,14 @@ class StatusesController < ApplicationController
     @status = Status.new params[:status]
     @status.group_id = @group_id
     @status.user_id = current_user.id
-    if @status.tracking == true
-      @status.tracked = true
-    else
-      @status.tracked = false
-    end
-    @status.save!
-    # reminder: need to add logic to prevent more than one 'tracking' status
-    redirect_to group_path(@group_id)
+    @status.tracked = @status.tracking
 
-    # respond_to do |format|
-    #   if @status.save
-    #     format.html { redirect_to group_path(@group_id), notice: 'Success!' }
-    #     format.js   {}
-    #     # format.json { render json: @status, status: :created, location: group_path(@group_id) }
-    #     format.json { render json: {'status' => 'ok'}.to_json }
-    #   else
-    #     format.html { render action: "new" }
-    #     # format.json { render json: @status.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    if @status.save!
+      render json: {status: :ok, username: current_user.username}.to_json
+    else
+      render json: {status: :error}.to_json
+    end
+
   end
 
   def destroy

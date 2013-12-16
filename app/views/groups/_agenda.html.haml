@@ -2,6 +2,17 @@
   %h3 Today's Agenda
   / = best_in_place @agenda, :body, :type => :textarea, :nil => "Click to add", :path => group_agenda_path(@group), :data => { :agenda_body => @agenda.body }
   - @members.each do |member|
-    = member.full_name
-    - member.agendas.each do |agenda|
-      %li#individual-agenda{"data-group-id" => "#{@group.id}", "data-agenda-id" => "#{agenda.id}", "data-agenda-body" => "#{agenda.body}"}= agenda.body
+    %div.group-agenda-item
+      = member.full_name
+      - member.agendas.each do |agenda|
+        %li#individual-agenda{"data-group-id" => "#{@group.id}", "data-agenda-id" => "#{agenda.id}", "data-agenda-body" => "#{agenda.body}"}= agenda.body
+
+%div.group-agenda-add
+  = form_for([@group, @group.agendas.build], html: {id: 'agenda-form'}) do |f|
+    %fieldset
+      %legend Add an Agenda
+      .field
+        = f.text_area :body, :size => '80x3'
+        %br/
+      .actions
+        = f.submit
