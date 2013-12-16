@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212120122) do
+ActiveRecord::Schema.define(:version => 20131216105135) do
 
   create_table "agendas", :force => true do |t|
     t.string   "body"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(:version => 20131212120122) do
 
   add_index "agendas", ["group_id"], :name => "index_agendas_on_group_id"
   add_index "agendas", ["user_id"], :name => "index_agendas_on_user_id"
+
+  create_table "durations", :force => true do |t|
+    t.integer  "status_id"
+    t.integer  "time_elapsed"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -46,13 +53,14 @@ ActiveRecord::Schema.define(:version => 20131212120122) do
   create_table "statuses", :force => true do |t|
     t.text     "body"
     t.boolean  "tracking"
-    t.integer  "duration"
+    t.integer  "time_tracked"
     t.datetime "previously_updated_at"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "group_id"
+    t.boolean  "tracked"
   end
 
   create_table "users", :force => true do |t|

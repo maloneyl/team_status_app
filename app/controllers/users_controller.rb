@@ -21,14 +21,13 @@ class UsersController < Devise::RegistrationsController
       # update duration
       @user.statuses.trackable.today.each do |status|
         if status.tracking?
-          if status.duration.present?
-            status.duration += (Time.now - status.previously_updated_at).to_i
-          else
-            status.duration = (Time.now - status.created_at).to_i
-          end
+          # if status.duration.present?
+          #   status.duration += (Time.now - status.previously_updated_at).to_i
+          # else
+          #   status.duration = (Time.now - status.created_at).to_i
+          # end
           status.save!
-          status.previously_updated_at = status.updated_at
-          status.save!
+          status.time_tracked = status.durations.sum(:time_elapsed) + (Time.now - status.durations.updated_at).to_i
         end
       end
     end

@@ -1,6 +1,6 @@
 %h3 Today So Far
 
-= bar_chart @user.statuses.trackable.group(:body).sum(:duration)
+= bar_chart @user.statuses.trackable.group(:body).sum(:time_tracked)
 / = pie_chart @user.statuses.tracakble.group(:body).count
 
 - @user.statuses.trackable.today.each do |status|
@@ -9,5 +9,5 @@
     \|
     = link_to status.group.name, group_path(status.group)
     \|
-    = distance_of_time_in_words(status.duration)
+    = distance_of_time_in_words(status.time_tracked)
     = "and counting" if status.tracking?

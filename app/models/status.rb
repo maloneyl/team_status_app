@@ -5,6 +5,20 @@ class Status < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
   belongs_to :project
+  has_many :durations
+
+  after_save :update_duration
+
+  def update_duration
+    if self.tracked == true
+      if self.durations.last.present?
+        duration_to_add = self.updated_at - self.durations.last.updated_at
+      else
+        duration_to_add = 0
+      end
+      Duration.create!(:status_id => self.id, :time_elapsed => duration_to_add)
+
+  end
 
   def self.today
     where("created_at >= ?", Time.zone.now.beginning_of_day)
@@ -16,7 +30,8 @@ class Status < ActiveRecord::Base
 
   # find all statuses that are actually related to work items, not simply messages
   def self.trackable
-    where("tracking = ? OR duration > ?", true, 0) # EQUIVALENT TO: all(:conditions => ['tracking = ? OR duration >= ?', true, 0])
+    # where("tracking = ? OR time_tracked > ?", true, 0)
+    where(:tracked => true) # easier now that there's a 'tracked' column
   end
 
   def self.with_mentions
