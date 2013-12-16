@@ -15,7 +15,10 @@ class StatusesController < ApplicationController
     @status.tracked = @status.tracking
 
     if @status.save!
-      render json: {status: :ok, username: current_user.username}.to_json
+      render json: {
+        status: :ok,
+        creator: @status.user.full_name
+      }.to_json
     else
       render json: {status: :error}.to_json
     end

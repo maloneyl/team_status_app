@@ -7,6 +7,8 @@ TeamStatusApp::Application.routes.draw do
   end
 
   resources :groups do
+    get 'refresh_statuses', :to => 'groups#refresh_statuses'
+
     resources :statuses do
       put 'switch_tracking', :on => :member
     end

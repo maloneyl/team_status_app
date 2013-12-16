@@ -1,18 +1,22 @@
-%div.group-agenda
+.group-agenda-list
   %h3 Today's Agenda
   / = best_in_place @agenda, :body, :type => :textarea, :nil => "Click to add", :path => group_agenda_path(@group), :data => { :agenda_body => @agenda.body }
   - @members.each do |member|
-    %div.group-agenda-item
+    .group-agenda-item
       = member.full_name
-      - member.agendas.each do |agenda|
-        %li#individual-agenda{"data-group-id" => "#{@group.id}", "data-agenda-id" => "#{agenda.id}", "data-agenda-body" => "#{agenda.body}"}= agenda.body
+      - agenda = member.agendas.where(:group_id => @group.id).last
+      - if member == current_user
+        .individual-agenda-editable{"data-group-id" => "#{@group.id}", "data-agenda-id" => "#{agenda.id}", "data-agenda-body" => "#{agenda.body}"}= agenda.body
+      - else
+        .individual-agenda= agenda.body
+    %br/
 
-%div.group-agenda-add
-  = form_for([@group, @group.agendas.build], html: {id: 'agenda-form'}) do |f|
-    %fieldset
-      %legend Add an Agenda
-      .field
-        = f.text_area :body, :size => '80x3'
-        %br/
-      .actions
-        = f.submit
+/ .group-agenda-add
+/   = form_for([@group, @group.agendas.build], html: {id: 'agenda-form'}) do |f|
+/     %fieldset
+/       %legend Add an Agenda
+/       .field
+/         = f.text_area :body, :size => '80x3'
+/         %br/
+/       .actions
+/         = f.submit
