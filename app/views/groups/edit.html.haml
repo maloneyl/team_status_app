@@ -1,0 +1,8 @@
+- if user_signed_in?
+  - if @is_owner == true
+    %h2 Update Group
+    = render 'details'
+  - else
+    This is not the group you're looking for...
+- else
+  Please sign up or sign in.
