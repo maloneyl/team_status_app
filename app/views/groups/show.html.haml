@@ -8,10 +8,10 @@
   - if @is_member == true
     %h2= @group.name.titleize
     = render 'members'
-    = render 'agenda'
+    = render 'agendas'
     = render 'statuses'
     - if @is_owner == true
-      %p Admin: Update Group / Add Member
+      %p= link_to 'Edit Group/Members', edit_group_path(@group)
   - else
     This is not the group you're looking for...
 - else

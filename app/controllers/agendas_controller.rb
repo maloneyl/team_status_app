@@ -17,16 +17,6 @@ class AgendasController < ApplicationController
     else
       render json: {status: :error}.to_json
     end
-
-    # respond_to do |format|
-    #   if @agenda.update_attributes(params[:agenda])
-    #     format.html { redirect_to(@agenda.group, :notice => 'Agenda was successfully updated.') }
-    #     format.json { respond_with_bip(@agenda.group) }
-    #   else
-    #     format.html { render :action => "edit" }
-    #     format.json { respond_with_bip(@agenda.group) }
-    #   end
-    # end
   end
 
 end

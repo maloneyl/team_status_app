@@ -1,7 +1,10 @@
 %h3= "#{@user.first_name}'s Groups"
-%ul
-  - @user.groups.each do |group|
+
+- if @groups.any?
+  - @groups.each do |group|
     - if group.owner_id == @user.id
       %li= link_to "#{group.name} (Admin)", group_path(group)
     - else
       %li= link_to "#{group.name} (Member)", group_path(group)
+- else
+  You haven't joined any groups yet!

@@ -1,7 +1,8 @@
 $(function() {
-  $("#status_body").blur(function() {
-    console.log(7);
-  });
+
+  $(".individual-agenda-editable").on("click", editAgenda);
+
+  $("#remove-from-group").on("click", removeGroupMember);
 
   $("#status-form").submit(function(e) {
     e.preventDefault();
@@ -17,7 +18,7 @@ $(function() {
     }
 
     $.ajax({
-      url: "/groups/" + group_id + "/statuses",
+      url: "/groups/" + groupId + "/statuses",
       type: "POST",
       dataType: "json",
       data: {
@@ -30,7 +31,7 @@ $(function() {
       success: function(response) {
         if (response.status == "ok") {
           console.log(response.username);
-          $(".group-status-list").load("/groups/" + groupId + "/refresh_statuses")
+          $(".group-status-list").load("/groups/" + groupId + "/get_statuses")
           // var $groupStatusList = $(".group-status-list");
           // var $listItem = $("<div class='group-status-list-item'>");
 
@@ -49,27 +50,14 @@ $(function() {
     });
   });
 
-    /* Activating Best In Place */
-  // jQuery(".best_in_place").best_in_place();
-
-  // $('.best_in_place').bind("ajax:success", function () {$(this).closest('tr').effect('highlight'); });
-  // $('.best_in_place').bind("ajax:success", function(){ alert('Agenda updated for '+$(this).data('agendaBody')); });
-
-  $(".individual-agenda-editable").on("click", editAgenda);
-
   function editAgenda() {
     var $this = $(this);
-    console.log($this);
     var groupId = $this.data("group-id");
-    console.log(groupId);
     var agendaId = $this.data("agenda-id");
-    console.log(agendaId);
     var agendaBody = $this.data("agenda-body");
-    console.log(agendaBody);
     var url = "/groups/" + groupId + "/agendas/" + agendaId;
-
-    var inputbox = "<input type='text' id='agenda_body' name='agenda[name]' value='" + agendaBody + "'>";
-    $this.html(inputbox);
+    var inputbox = "<textarea rows='3' cols='80' id='agenda_body' name='agenda[name]'>";
+    $this.html(inputbox + agendaBody + "</textarea>");
     $("#agenda_body").focus(); // makes it possible to type in the box...
 
     $("#agenda_body").blur(function() {
@@ -95,10 +83,26 @@ $(function() {
       })
 
     });
+  };
 
+  function removeGroupMember() {
+    var $this = $(this);
+    var groupId = $this.data('group-id');
+    var memberId = $this.data('member-id');
+    var url = '/groups/' + groupId + '/remove_member/' + memberId;
 
-
-
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      dataType: "json",
+      success: function() {
+        console.log('Removed!');
+        // still need to reconstruct the view
+      },
+      error: function() {
+        console.log('Error!');
+      }
+    })
   }
 
 });

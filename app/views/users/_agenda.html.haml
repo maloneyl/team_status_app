@@ -1,4 +1,9 @@
 %h3 On Your Agenda
 
-- @user.agendas.today.each do |agenda|
-  %li= "#{agenda.body} | #{agenda.group.name}"
+- if @agendas.any?
+  - @agendas.each do |agenda|
+    - if agenda.body.present?
+      %li= "#{agenda.body} | #{agenda.group.name} | #{agenda.updated_at}"
+- else
+  You don't have anything on your agenda yet.
+

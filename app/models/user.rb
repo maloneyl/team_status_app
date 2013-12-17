@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
 
   # Others available are: :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  # , :confirmable
+  devise :invitable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   attr_accessible :email, :first_name, :last_name, :username, :password, :password_confirmation, :remember_me
 
