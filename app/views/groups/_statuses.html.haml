@@ -19,7 +19,7 @@
 .group-status-list
   - @statuses.each do |message|
     .group-status-list-item
-      = message.user.full_name
+      = "#{message.user.full_name} (@#{message.user.username})"
       \|
       %i= time_ago_in_words(message.created_at) + ' ago'
       - if message.at_user == current_user.username || message.at_user == "all"
