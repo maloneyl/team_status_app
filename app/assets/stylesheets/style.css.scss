@@ -36,6 +36,31 @@ body {
   padding-top: 30px; // to not be covered up by sticky top nav
 }
 
+.home-tagline {
+  font-family: 'Bitter', serif;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-size: 40px;
+  display: inline-block;
+  float: right;
+  margin: 40px 30px 30px 30px;
+  text-align: right;
+}
+
+.home-cta {
+  font-family: 'Bitter', serif;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  font-style: italic;
+  display: inline-block;
+  float: right;
+  margin: 30px 30px 30px 30px;
+  clear: both;
+}
+
 .page-heading {
   font-family: 'Bitter';
   color: white;
@@ -53,7 +78,7 @@ body {
   margin: 5px 0px 10px 0px;
 }
 
-.groups-members-section {
+.groups-members-section, .users-groups-section {
   position: relative;
   width: 30%;
   float: right;
@@ -122,13 +147,19 @@ body {
   margin-bottom: 10px;
 }
 
-.group-status-list-item-body-regular {
-  font-family: 'Bitter', serif;
-}
-
 .group-status-list-item-body-mention {
   background-color: yellow;
   color: black;
   font-family: 'Bitter', serif;
+}
+
+.group-status-list-item-body-regular, .individual-agenda-editable, .individual-agenda {
+  font-family: 'Bitter', serif;
+}
+
+.users-groups-list {
+  a {
+    color: black;
+  }
 }
 

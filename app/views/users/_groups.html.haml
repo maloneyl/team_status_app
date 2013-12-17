@@ -1,10 +1,12 @@
-%h3= "#{@user.first_name}'s Groups"
+.section-heading
+  = "#{@user.first_name}'s Groups"
 
-- if @groups.any?
-  - @groups.each do |group|
-    - if group.owner_id == @user.id
-      %li= link_to "#{group.name} (Admin)", group_path(group)
-    - else
-      %li= link_to "#{group.name} (Member)", group_path(group)
-- else
-  You haven't joined any groups yet!
+.users-groups-list
+  - if @groups.any?
+    - @groups.each do |group|
+      - if group.owner_id == @user.id
+        %li= link_to "#{group.name} (Admin)", group_path(group)
+      - else
+        %li= link_to "#{group.name} (Member)", group_path(group)
+  - else
+    You haven't joined any groups yet!
