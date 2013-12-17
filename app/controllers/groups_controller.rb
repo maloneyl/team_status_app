@@ -1,5 +1,39 @@
 class GroupsController < ApplicationController
 
+  def new
+    @group = Group.new
+    @possible_users_to_add = User.all(:conditions => ["id != ?", current_user.id])
+  end
+
+  def create
+    @group = Group.new params[:group]
+    @group.owner_id = current_user.id
+    @group.users << current_user
+    @group.users << User.find(params[:person]) if params[:person].present?
+    if @group.save
+      redirect_to @group
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @group = Group.find params[:id]
+    @is_owner = true if @group.owner_id == current_user.id rescue nil
+    @existing_member_ids = @group.users.map { |hash| hash[:id ] }
+    @possible_users_to_add = User.all(:conditions => ["id not in (?)", @existing_member_ids])
+  end
+
+  def update
+    @group = Group.find params[:id]
+    @group.users << User.find(params[:person]) if params[:person].present?
+    if @group.update_attributes params[:group]
+      redirect_to @group
+    else
+      render :edit
+    end
+  end
+
   def show
     @group = Group.find params[:id]
     @members = @group.users
@@ -22,23 +56,6 @@ class GroupsController < ApplicationController
   #   @statuses = @group.statuses.where("created_at >= ?", @day.beginning_of_day)
   # end
 
-  def edit
-    @group = Group.find params[:id]
-    @is_owner = true if @group.owner_id == current_user.id rescue nil
-    @existing_member_ids = @group.users.map { |hash| hash[:id ] }
-    @possible_users_to_add = User.all(:conditions => ["id not in (?)", @existing_member_ids])
-  end
-
-  def update
-    @group = Group.find params[:id]
-    @group.users << User.find(params[:person]) if params[:person].present?
-    if @group.update_attributes params[:group]
-      redirect_to @group
-    else
-      render :edit
-    end
-  end
-
   def remove_member
     @member = User.find params[:user_id]
     @group = Group.find params[:group_id] # not :id. see routes
@@ -47,5 +64,8 @@ class GroupsController < ApplicationController
     output = {'status' => 'ok'}.to_json
     render json: output
   end
+
+
+
 
 end

@@ -72,10 +72,6 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    devise_invitable (1.1.8)
-      actionmailer (~> 3.0)
-      devise (>= 2.1.2)
-      railties (~> 3.0)
     diff-lcs (1.2.5)
     erb2haml (0.1.5)
       html2haml
@@ -225,7 +221,6 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
-  devise_invitable (~> 1.1.0)
   erb2haml
   factory_girl_rails
   faker

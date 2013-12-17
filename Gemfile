@@ -12,7 +12,7 @@ gem 'haml-rails'
 gem 'erb2haml' # then run: rake haml:replace_erbs
 
 gem 'devise'
-gem 'devise_invitable', '~> 1.1.0'
+# gem 'devise_invitable', '~> 1.1.0'
 
 # gem 'cancan'
 
