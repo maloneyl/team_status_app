@@ -1,15 +1,88 @@
+@import url('http://fonts.googleapis.com/css?family=Bitter');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans');
+@import url('http://fonts.googleapis.com/css?family=Roboto');
+@import url('http://fonts.googleapis.com/css?family=Crete+Round');
+@import url('http://fonts.googleapis.com/css?family=Archivo+Narrow');
+
+nav {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-top: 0;
+  border-bottom: 10;
+  z-index: 100;
+  font-family: 'Archivo Narrow';
+  padding: 10px;
+  background-color: black;
+  color: white;
+
+  a {
+    color: yellow;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: white;
+  }
+}
+
 h2, h3 {
-  font-family: 'Source Sans Pro';
+  font-family: 'Bitter';
 }
 
 body {
-  font-family: 'Cambria';
+  font-family: 'Roboto';
+  padding-top: 30px; // to not be covered up by sticky top nav
+}
+
+.page-heading {
+  font-family: 'Bitter';
+  color: white;
+  background-color: purple;
+  font-size: 30px;
+  display: inline-block;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 10px;
 }
 
 .section-heading {
-  font-family: 'Source Sans Pro';
+  font-family: 'Bitter';
   color: purple;
   font-size: 24px;
+}
+
+.groups-members-section {
+  position: relative;
+  width: 30%;
+  float: right;
+  border: 8px groove black;
+  background-color: #d3d3d3;
+  padding: 10px;
+  margin-bottom: 15px;
+
+  li {
+    list-style-type: square; // disc is default; circle is hollow equivalent
+    padding: 0px;
+  }
+}
+
+.groups-agendas-section {
+  position: relative;
+  width: 30%;
+  float: right;
+  clear: both;
+  border: 8px groove black;
+  background-color: #d3d3d3;
+  padding: 10px;
+  clear: both;
+}
+
+.groups-statuses-section {
+  position: relative;
+  float: left;
+  clear: left;
+  width: 60%;
 }
 
 .group-status-list-item {

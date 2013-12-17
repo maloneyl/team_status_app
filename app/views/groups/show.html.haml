@@ -6,10 +6,14 @@
 
 - if user_signed_in?
   - if @is_member == true
-    %h2= @group.name.titleize
-    = render 'members'
-    = render 'agendas'
-    = render 'statuses'
+    .page-heading
+      = @group.name.titleize
+    .groups-members-section
+      = render 'members'
+    .groups-agendas-section
+      = render 'agendas'
+    .groups-statuses-section
+      = render 'statuses'
     - if @is_owner == true
       %p= link_to 'Edit Group/Members', edit_group_path(@group)
   - else

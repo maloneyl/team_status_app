@@ -1,9 +1,11 @@
 .group-agenda-list
-  %h3 Today's Agenda
-  %p Please update your agenda daily by clicking on the content. You can only edit your own.
+  .section-heading
+    Today's Agenda
+  %p
+    Please update your agenda daily by clicking on the content. You can only edit your own.
   - @members.each do |member|
     .group-agenda-item
-      = member.full_name
+      %b= member.full_name
       - agenda = member.agendas.where(:group_id => @group.id).last
       - if member == current_user
         .individual-agenda-editable{"data-group-id" => "#{@group.id}", "data-agenda-id" => "#{agenda.id}", "data-agenda-body" => "#{agenda.body}"}
