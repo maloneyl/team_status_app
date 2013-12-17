@@ -1,7 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Bitter');
-@import url('http://fonts.googleapis.com/css?family=Open+Sans');
 @import url('http://fonts.googleapis.com/css?family=Roboto');
-@import url('http://fonts.googleapis.com/css?family=Crete+Round');
 @import url('http://fonts.googleapis.com/css?family=Archivo+Narrow');
 
 nav {
@@ -40,11 +38,11 @@ body {
   font-family: 'Bitter', serif;
   background-color: black;
   color: white;
-  padding: 10px;
+  padding: 15px;
   font-size: 40px;
   display: inline-block;
   float: right;
-  margin: 40px 30px 30px 30px;
+  margin: 40px 30px 10px 30px;
   text-align: right;
 }
 
@@ -57,7 +55,7 @@ body {
   font-style: italic;
   display: inline-block;
   float: right;
-  margin: 30px 30px 30px 30px;
+  margin: 10px 30px 30px 30px;
   clear: both;
 }
 
@@ -91,6 +89,10 @@ body {
     list-style-type: square; // disc is default; circle is hollow equivalent
     padding: 0px;
   }
+}
+
+.users-groups-section {
+  width: 20%;
 }
 
 .groups-agendas-section {
@@ -132,7 +134,7 @@ body {
     width: 35%;
     background-color: purple;
     color: white;
-    font-family: 'Bitter', serif;
+    font-family: 'Archivo Narrow', sans-serif;
     text-transform: uppercase;
   }
   margin-top: 15px;
@@ -140,15 +142,15 @@ body {
 }
 
 .group-status-list-item {
-  // border: 3px solid #e0e0e0;
   background-color: #e0e0e0;
   border: 3px solid gray;
-  padding: 5px;
-  margin-bottom: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: block;
 }
 
 .group-status-list-item-body-mention {
-  background-color: yellow;
+  background-color: #fff68f;
   color: black;
   font-family: 'Bitter', serif;
 }
@@ -159,7 +161,67 @@ body {
 
 .users-groups-list {
   a {
+    font-family: 'Archivo Narrow';
     color: black;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }
 
+.users-mentions-list-item {
+  background-color: #fffacd;
+  border: 3px solid gray;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: inline-block;
+
+  a {
+    text-decoration: none;
+    color: #1874cd;
+  }
+}
+
+.users-mentions-list-item-body {
+  font-family: 'Bitter', serif;
+}
+
+.group-status-list-item {
+  background-color: #e0e0e0;
+  border: 3px solid gray;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.users-agendas-list, .users-reports-today-list, .users-reports-yesterday-list {
+  background-color: #e0e0e0;
+  border: 3px solid gray;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.users-agendas-list-item, .users-reports-today-list-item, .users-reports-yesteday-list-item {
+  margin-bottom: 10px;
+
+  a {
+    color: #1874cd;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+.users-mentions-section, .users-agendas-section, .users-reports-section {
+  position: relative;
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+// @media (max-width: 979px) {
+//   body {
+//     padding-top: 0px;
+//   }
+// }

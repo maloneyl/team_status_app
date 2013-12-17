@@ -31,7 +31,11 @@ $(function() {
       success: function(response) {
         if (response.status == "ok") {
           console.log(response.username);
-          $(".group-status-list").load("/groups/" + groupId + "/get_statuses")
+          location.onload(); // still need to reconstruct the view
+
+          // no-go:
+          // $(".group-status-list").load("/groups/" + groupId + "/get_statuses")
+
           // var $groupStatusList = $(".group-status-list");
           // var $listItem = $("<div class='group-status-list-item'>");
 
@@ -56,7 +60,7 @@ $(function() {
     var agendaId = $this.data("agenda-id");
     var agendaBody = $this.data("agenda-body");
     var url = "/groups/" + groupId + "/agendas/" + agendaId;
-    var inputbox = "<textarea rows='3' cols='80' id='agenda_body' name='agenda[name]'>";
+    var inputbox = "<textarea rows='3' cols='30' id='agenda_body' name='agenda[name]'>";
     $this.html(inputbox + agendaBody + "</textarea>");
     $("#agenda_body").focus(); // makes it possible to type in the box...
 
@@ -97,7 +101,7 @@ $(function() {
       dataType: "json",
       success: function() {
         console.log('Removed!');
-        // still need to reconstruct the view
+        location.onload(); // update this and reconstruct the view...
       },
       error: function() {
         console.log('Error!');

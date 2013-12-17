@@ -19,22 +19,29 @@ class UsersController < Devise::RegistrationsController
       end
       @mentions = @mentions.sort_by(&:created_at).reverse
 
-      @agendas = current_user.agendas
+      @agendas = @user.agendas
+
+      @items_today = @user.statuses.trackable.today rescue nil
+      @items_yesteday = @user.statuses.trackable.yesterday rescue nil
 
       # update duration if tracking
-      @user.statuses.trackable.today.each do |status|
-        if status.tracking?
-          if status.durations.last.present?
-            status.time_tracked = status.durations.today.sum(:time_elapsed) + (Time.now - status.durations.today.last.updated_at).to_i
-          else
-            status.time_tracked = (Time.now - status.durations.today.last.updated_at).to_i
+      if @items_today.present?
+        @items_today.each do |status|
+          if status.tracking?
+            if status.durations.last.present?
+              status.time_tracked = status.durations.today.sum(:time_elapsed) + (Time.now - status.durations.today.last.updated_at).to_i
+            else
+              status.time_tracked = (Time.now - status.durations.today.last.updated_at).to_i
+            end
+            status.save!
           end
-          status.save!
         end
       end
 
-      @user.statuses.trackable.yesterday.each do |status|
-        status.time_tracked = status.durations.yesterday.sum(:time_elapsed)
+      if @items_yesterday.present?
+        @items_yesterday.each do |status|
+          status.time_tracked = status.durations.yesterday.sum(:time_elapsed)
+        end
       end
     end
   end

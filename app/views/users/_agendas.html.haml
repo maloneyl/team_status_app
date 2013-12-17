@@ -1,9 +1,16 @@
-%h3 On Your Agenda
+.section-heading
+  On Your Agenda
 
-- if @agendas.any?
-  - @agendas.each do |agenda|
-    - if agenda.body.present?
-      %li= "#{agenda.body} | #{agenda.group.name} | #{agenda.updated_at}"
-- else
-  You don't have anything on your agenda yet.
+.users-agendas-list
+  - if @agendas.any?
+    - @agendas.each do |agenda|
+      .users-agendas-list-item
+        - if agenda.body.present?
+          = link_to agenda.group.name, group_path(agenda.group)
+          \|
+          %i= agenda.updated_at
+          %br/
+          = agenda.body
+  - else
+    You don't have anything on your agenda yet.
 

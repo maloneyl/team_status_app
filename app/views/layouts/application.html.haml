@@ -3,16 +3,17 @@
   %head
     %title TeamStatusApp
     = stylesheet_link_tag    'application', :media => 'all'
-    = yield :stylesheets
     = javascript_include_tag 'application'
     = javascript_include_tag '//www.google.com/jsapi', 'chartkick'
     = csrf_meta_tags
   %body
     %nav
       - if user_signed_in?
-        = "Hello, #{current_user.first_name} (@#{current_user.username}; #{current_user.email})!"
+        = "Hello, #{current_user.first_name} (@#{current_user.username})!"
         \|
         = link_to 'Dashboard', user_path(current_user)
+        \|
+        = link_to 'New Group', new_group_path
         \|
         = link_to 'Account Settings', edit_user_registration_path(current_user)
         \|
