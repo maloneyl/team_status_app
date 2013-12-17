@@ -28,10 +28,8 @@ class Status < ActiveRecord::Base
     where(:created_at => (Time.now.midnight - 1.day)..Time.now.midnight)
   end
 
-  # find all statuses that are actually related to work items, not simply messages
   def self.trackable
-    # where("tracking = ? OR time_tracked > ?", true, 0)
-    where(:tracked => true) # easier now that there's a 'tracked' column
+    where(:tracked => true)
   end
 
   def self.with_mentions
