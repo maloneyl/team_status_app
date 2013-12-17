@@ -43,13 +43,14 @@ body {
   font-size: 30px;
   display: inline-block;
   padding: 10px 10px 10px 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .section-heading {
   font-family: 'Bitter';
   color: purple;
   font-size: 24px;
+  margin: 5px 0px 10px 0px;
 }
 
 .groups-members-section {
@@ -76,13 +77,41 @@ body {
   background-color: #d3d3d3;
   padding: 10px;
   clear: both;
+
+  textarea {
+    background-color: purple;
+    color: white;
+  }
 }
 
 .groups-statuses-section {
   position: relative;
-  float: left;
-  clear: left;
   width: 60%;
+}
+
+#add-status-form {
+  fieldset {
+    border: 3px dotted purple;
+  }
+  legend, label {
+    font-family: 'Bitter', serif;
+    color: #2f4f4f;
+  }
+  textarea {
+    border: 1px solid purple;
+    width: 100%;
+    font-family: 'Bitter', serif;
+    font-size: 16px;
+  }
+  input[type='submit'] {
+    width: 35%;
+    background-color: purple;
+    color: white;
+    font-family: 'Bitter', serif;
+    text-transform: uppercase;
+  }
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .group-status-list-item {

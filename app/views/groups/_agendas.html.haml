@@ -20,13 +20,3 @@
           - else
             (None entered yet.)
     %br/
-
-/ .group-agenda-add
-/   = form_for([@group, @group.agendas.build], html: {id: 'agenda-form'}) do |f|
-/     %fieldset
-/       %legend Add an Agenda
-/       .field
-/         = f.text_area :body, :size => '80x3'
-/         %br/
-/       .actions
-/         = f.submit
