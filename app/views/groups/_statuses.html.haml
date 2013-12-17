@@ -18,17 +18,17 @@
 
 .group-status-list
   - @statuses.each do |message|
-    %div.group-status-list-item
+    .group-status-list-item
       = message.user.full_name
       \|
       %i= time_ago_in_words(message.created_at) + ' ago'
       - if message.at_user == current_user.username || message.at_user == "all"
-        %div.group-status-list-item-body-mention
+        .group-status-list-item-body-mention
           = message.body
       - else
-        %div.group-status-list-item-body-regular
+        .group-status-list-item-body-regular
           = message.body
-      %div.group-status-list-item-tracking
+      .group-status-list-item-tracking
         - if message.user_id == current_user.id && message.tracking
           = link_to "Done? Stop timer", switch_tracking_group_status_path(@group, message), :method => :put
       - if message.user_id == current_user.id

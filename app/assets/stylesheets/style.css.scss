@@ -115,10 +115,20 @@ body {
 }
 
 .group-status-list-item {
+  // border: 3px solid #e0e0e0;
+  background-color: #e0e0e0;
+  border: 3px solid gray;
+  padding: 5px;
   margin-bottom: 10px;
 }
 
-.group-status-list-item-body-mention {
-  background-color: blue;
-  color: white;
+.group-status-list-item-body-regular {
+  font-family: 'Bitter', serif;
 }
+
+.group-status-list-item-body-mention {
+  background-color: yellow;
+  color: black;
+  font-family: 'Bitter', serif;
+}
+
