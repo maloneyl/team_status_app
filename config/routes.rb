@@ -7,9 +7,15 @@ TeamStatusApp::Application.routes.draw do
   end
 
   resources :groups do
+    get 'get_statuses', :to => 'groups#get_statuses'
+
     resources :statuses do
       put 'switch_tracking', :on => :member
     end
+
+    resources :agendas
+
+    put 'remove_member/:user_id', :to => 'groups#remove_member'
   end
 
   root :to => 'home#index'

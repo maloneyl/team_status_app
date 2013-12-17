@@ -1,0 +1,227 @@
+@import url('http://fonts.googleapis.com/css?family=Bitter');
+@import url('http://fonts.googleapis.com/css?family=Roboto');
+@import url('http://fonts.googleapis.com/css?family=Archivo+Narrow');
+
+nav {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-top: 0;
+  border-bottom: 10;
+  z-index: 100;
+  font-family: 'Archivo Narrow';
+  padding: 10px;
+  background-color: black;
+  color: white;
+
+  a {
+    color: yellow;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: white;
+  }
+}
+
+h2, h3 {
+  font-family: 'Bitter';
+}
+
+body {
+  font-family: 'Roboto';
+  padding-top: 30px; // to not be covered up by sticky top nav
+}
+
+.home-tagline {
+  font-family: 'Bitter', serif;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  font-size: 40px;
+  display: inline-block;
+  float: right;
+  margin: 40px 30px 10px 30px;
+  text-align: right;
+}
+
+.home-cta {
+  font-family: 'Bitter', serif;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  font-style: italic;
+  display: inline-block;
+  float: right;
+  margin: 10px 30px 30px 30px;
+  clear: both;
+}
+
+.page-heading {
+  font-family: 'Bitter';
+  color: white;
+  background-color: purple;
+  font-size: 30px;
+  display: inline-block;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 15px;
+}
+
+.section-heading {
+  font-family: 'Bitter';
+  color: purple;
+  font-size: 24px;
+  margin: 5px 0px 10px 0px;
+}
+
+.groups-members-section, .users-groups-section {
+  position: relative;
+  width: 30%;
+  float: right;
+  border: 8px groove black;
+  background-color: #d3d3d3;
+  padding: 10px;
+  margin-bottom: 15px;
+
+  li {
+    list-style-type: square; // disc is default; circle is hollow equivalent
+    padding: 0px;
+  }
+}
+
+.users-groups-section {
+  width: 20%;
+}
+
+.groups-agendas-section {
+  position: relative;
+  width: 30%;
+  float: right;
+  clear: both;
+  border: 8px groove black;
+  background-color: #d3d3d3;
+  padding: 10px;
+  clear: both;
+
+  textarea {
+    background-color: purple;
+    color: white;
+  }
+}
+
+.groups-statuses-section {
+  position: relative;
+  width: 60%;
+}
+
+#add-status-form {
+  fieldset {
+    border: 3px dotted purple;
+  }
+  legend, label {
+    font-family: 'Bitter', serif;
+    color: #2f4f4f;
+  }
+  textarea {
+    border: 1px solid purple;
+    width: 100%;
+    font-family: 'Bitter', serif;
+    font-size: 16px;
+  }
+  input[type='submit'] {
+    width: 35%;
+    background-color: purple;
+    color: white;
+    font-family: 'Archivo Narrow', sans-serif;
+    text-transform: uppercase;
+  }
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.group-status-list-item {
+  background-color: #e0e0e0;
+  border: 3px solid gray;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.group-status-list-item-body-mention {
+  background-color: #fff68f;
+  color: black;
+  font-family: 'Bitter', serif;
+}
+
+.group-status-list-item-body-regular, .individual-agenda-editable, .individual-agenda {
+  font-family: 'Bitter', serif;
+}
+
+.users-groups-list {
+  a {
+    font-family: 'Archivo Narrow';
+    color: black;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.users-mentions-list-item {
+  background-color: #fffacd;
+  border: 3px solid gray;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: inline-block;
+
+  a {
+    text-decoration: none;
+    color: #1874cd;
+  }
+}
+
+.users-mentions-list-item-body {
+  font-family: 'Bitter', serif;
+}
+
+.group-status-list-item {
+  background-color: #e0e0e0;
+  border: 3px solid gray;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.users-agendas-list, .users-reports-today-list, .users-reports-yesterday-list {
+  background-color: #e0e0e0;
+  border: 3px solid gray;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.users-agendas-list-item, .users-reports-today-list-item, .users-reports-yesteday-list-item {
+  margin-bottom: 10px;
+
+  a {
+    color: #1874cd;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+.users-mentions-section, .users-agendas-section, .users-reports-section {
+  position: relative;
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+// @media (max-width: 979px) {
+//   body {
+//     padding-top: 0px;
+//   }
+// }

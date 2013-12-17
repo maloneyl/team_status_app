@@ -1,0 +1,36 @@
+.section-heading
+  Reports
+
+%h3 Today
+
+- if @items_today.present?
+  = bar_chart @items_today.group(:body).sum(:time_tracked)
+  / = pie_chart @user.statuses.tracakble.group(:body).count
+
+  .users-reports-today-list
+    - @items_today.each do |status|
+      .users-reports-today-list-item
+        = status.body
+        %br/
+        = link_to status.group.name, group_path(status.group)
+        \|
+        %i= distance_of_time_in_words(status.time_tracked)
+        %i= "and counting" if status.tracking?
+- else
+  Nothing here...
+
+%h3 Yesterday
+
+- if @items_yesterday.present?
+  = bar_chart @items_yesterday.group(:body).sum(:time_tracked)
+
+  .users-reports-yesterday-list
+    - @items_yesterday.each do |status|
+      %li
+        = status.body
+        \|
+        = link_to status.group.name, group_path(status.group)
+        \|
+        = distance_of_time_in_words(status.time_tracked)
+- else
+  Nothing here...

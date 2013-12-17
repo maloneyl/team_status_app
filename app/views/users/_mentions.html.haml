@@ -1,0 +1,14 @@
+.section-heading
+  Recent Mentions
+
+.users-mentions-list
+  - if @mentions.present?
+    - @mentions.each do |mention|
+      .users-mentions-list-item
+        = "From: #{mention.user.full_name} (@#{mention.user.username})"
+        .users-mentions-list-item-body
+          = mention.body
+        %i= "#{time_ago_in_words(mention.created_at)} ago in"
+        = link_to mention.group.name, group_path(mention.group)
+  - else
+    None lately!

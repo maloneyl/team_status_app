@@ -1,0 +1,14 @@
+.section-heading
+  In This Group
+
+.group-members-list
+  %ul
+    .group-members-list-item-admin
+      %li= "#{@owner.full_name} (@#{@owner.username}) (Admin)"
+    .group-members-list-item-regular
+    - @members.each do |member|
+      - if member != @owner # can't move this to line below without extra space/line when false
+        %li
+          = "#{member.full_name} (@#{member.username})"
+          - if @is_owner == true
+            %button#remove-from-group{"data-group-id" => "#{@group.id}", "data-member-id" => "#{member.id}"}= "Remove from Group"
