@@ -33,15 +33,15 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :production, :test do
+group :development, :test do
   gem 'pry-rails'
-  gem 'pry-byebug'
   gem 'better_errors'
   gem 'binding_of_caller'
 
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
+
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'faker'
