@@ -23,26 +23,31 @@ class UsersController < Devise::RegistrationsController
     @agendas = @user.agendas.all(:order => 'updated_at DESC')
 
     # get items for reports
-    @items_today = @user.statuses.trackable.today rescue nil
-    @items_yesterday = @user.statuses.trackable.yesterday rescue nil
+    @trackable_items_today = @user.statuses.trackable.today rescue nil
+    @trackable_items_yesterday = @user.statuses.trackable.yesterday rescue nil
 
-    # update item duration if tracking
-    if @items_today.present?
-      @items_today.each do |status|
+    # update item duration if still tracking
+    # get status.durations._.time_elapsed into status.time_tracked for today's items
+    if @trackable_items_today.present?
+      @trackable_items_today.each do |status|
         if status.tracking?
           if status.durations.last.present?
             status.time_tracked = status.durations.today.sum(:time_elapsed) + (Time.now - status.durations.today.last.updated_at).to_i
           else
             status.time_tracked = (Time.now - status.durations.today.last.updated_at).to_i
           end
-          status.save!
+        else
+          status.time_tracked = status.durations.today.sum(:time_elapsed)
         end
+        status.save!
       end
     end
 
+    # get status.durations._.time_elapsed into status.time_tracked for yesterday's items
     if @items_yesterday.present?
       @items_yesterday.each do |status|
         status.time_tracked = status.durations.yesterday.sum(:time_elapsed)
+        status.save!
       end
     end
   end
