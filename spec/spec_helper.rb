@@ -35,4 +35,23 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation) # :transaction is the other option, which we won't use
+  end
+
+  config.before(:each) do # :each means for each test
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  config.include Devise::TestHelpers, :type => :controller
+
 end
