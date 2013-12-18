@@ -66,7 +66,8 @@ TeamStatusApp::Application.configure do
     port: 25, # this is what Mandrill uses for Ruby on Rails
     enable_starttls_auto: true,
     user_name: ENV['MANDRILL_USERNAME'],
-    password: ENV['MANDRILL_API_KEY'] # API key
+    password: ENV['MANDRILL_API_KEY'], # API key
+    domain: 'herokuapp.com'
   }
 
   # Enable threaded mode
