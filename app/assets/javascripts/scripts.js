@@ -3,6 +3,7 @@ $(function() {
   $(".individual-agenda-editable").on("click", editAgenda);
 
   $(".remove-from-group").on("click", removeGroupMember);
+  $(".delete-status-link").on("click", removeStatus);
 
   // $("#status-form").submit(function(e) {
   //   e.preventDefault();
@@ -108,5 +109,27 @@ $(function() {
       }
     })
   }
+
+  function removeStatus() {
+    var $this = $(this);
+    var groupId = $this.data('group-id');
+    var statusId = $this.data('status-id');
+    var url = '/groups/' + groupId + '/statuses/' + statusId;
+
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      dataType: "json",
+      success: function() {
+        console.log('Removed!');
+        $this.closest(".group-status-list-item").hide();
+      },
+      error: function() {
+        console.log('Error!');
+      }
+    })
+  }
+
+
 
 });

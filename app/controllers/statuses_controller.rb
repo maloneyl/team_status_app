@@ -30,10 +30,10 @@ class StatusesController < ApplicationController
   def destroy
     status = Status.find params[:id]
     status.destroy
-    redirect_to group_path(params[:group_id])
+    # redirect_to group_path(params[:group_id])
 
-    # output = {'status' => 'ok'}.to_json
-    # render json: output
+    output = {'status' => 'ok'}.to_json
+    render json: output
   end
 
   def switch_tracking
