@@ -2,7 +2,7 @@ $(function() {
 
   $(".individual-agenda-editable").on("click", editAgenda);
 
-  $("#remove-from-group").on("click", removeGroupMember);
+  $(".remove-from-group").on("click", removeGroupMember);
 
   // $("#status-form").submit(function(e) {
   //   e.preventDefault();
@@ -101,7 +101,7 @@ $(function() {
       dataType: "json",
       success: function() {
         console.log('Removed!');
-        location.onload(); // update this and reconstruct the view...
+        $this.closest(".group-members-list-item-regular").hide();
       },
       error: function() {
         console.log('Error!');

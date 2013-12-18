@@ -12,7 +12,7 @@ class UsersController < Devise::RegistrationsController
     # get groups and mentions
     @mentions = []
     @groups = @user.groups
-    @groups.each do |group|
+    @groups.each do |group| # this makes sure mentions from user's old groups are excluded
       group.statuses.with_mentions.each do |status|
         @mentions << status if status.at_user == current_user.username || status.at_user == "all"
       end
