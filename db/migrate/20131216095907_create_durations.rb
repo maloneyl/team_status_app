@@ -5,5 +5,6 @@ class CreateDurations < ActiveRecord::Migration
       t.integer :time_elapsed
       t.timestamps
     end
+  add_index :durations, :status_id
   end
 end

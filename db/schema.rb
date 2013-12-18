@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131216105135) do
+ActiveRecord::Schema.define(:version => 20131216095907) do
 
   create_table "agendas", :force => true do |t|
     t.string   "body"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20131216105135) do
     t.datetime "updated_at",   :null => false
   end
 
+  add_index "durations", ["status_id"], :name => "index_durations_on_status_id"
+
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.integer  "owner_id"
@@ -43,29 +45,23 @@ ActiveRecord::Schema.define(:version => 20131216105135) do
     t.integer "user_id"
   end
 
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "group_id"
-  end
-
   create_table "statuses", :force => true do |t|
     t.text     "body"
     t.boolean  "tracking"
-    t.integer  "time_tracked"
-    t.datetime "previously_updated_at"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.integer  "group_id"
     t.boolean  "tracked"
+    t.integer  "time_tracked"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "user_id"
+    t.integer  "group_id"
   end
+
+  add_index "statuses", ["group_id"], :name => "index_statuses_on_group_id"
+  add_index "statuses", ["user_id"], :name => "index_statuses_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => ""
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -85,7 +81,6 @@ ActiveRecord::Schema.define(:version => 20131216105135) do
     t.string   "username"
     t.string   "role"
     t.text     "image"
-    t.string   "bio"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
