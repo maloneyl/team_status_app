@@ -1,3 +1,5 @@
+require 'json'
+
 class GroupsController < ApplicationController
 
   def new

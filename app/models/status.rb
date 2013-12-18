@@ -5,7 +5,7 @@ class Status < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
   belongs_to :project
-  has_many :durations
+  has_many :durations, :dependent => :destroy
 
   after_save :update_duration
 
