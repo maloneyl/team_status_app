@@ -31,23 +31,19 @@ class UsersController < Devise::RegistrationsController
     if @trackable_items_today.present?
       @trackable_items_today.each do |status|
         if status.tracking?
-          if status.durations.last.present?
-            status.time_tracked = status.durations.today.sum(:time_elapsed) + (Time.now - status.durations.today.last.updated_at).to_i
-          else
-            status.time_tracked = (Time.now - status.durations.today.last.updated_at).to_i
-          end
+          time = status.durations.today.sum(:time_elapsed) + (Time.now - status.durations.today.last.updated_at).to_i
         else
-          status.time_tracked = status.durations.today.sum(:time_elapsed)
+          time = status.durations.today.sum(:time_elapsed)
         end
-        status.save!
+        status.update_column(:time_tracked, time) # skip after_save and also no updated_at
       end
     end
 
     # get status.durations._.time_elapsed into status.time_tracked for yesterday's items
     if @items_yesterday.present?
       @items_yesterday.each do |status|
-        status.time_tracked = status.durations.yesterday.sum(:time_elapsed)
-        status.save!
+        time = status.durations.yesterday.sum(:time_elapsed)
+        status.update_column(:time_tracked, time) # skip after_save and also no updated_at
       end
     end
   end

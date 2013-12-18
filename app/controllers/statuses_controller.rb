@@ -15,6 +15,16 @@ class StatusesController < ApplicationController
     @status.tracked = @status.tracking
 
     if @status.save!
+      # avoid double-counting: stop any running timer
+      statuses_to_update = current_user.statuses.where(:tracking => true).all
+      if statuses_to_update.any?
+        statuses_to_update.each do |s|
+          if s != @status
+            s.tracking = false
+            s.save!
+          end
+        end
+      end
       redirect_to group_path(@group_id)
       # render json: {
       #   status: :ok,
