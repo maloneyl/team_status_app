@@ -57,9 +57,10 @@ class GroupsController < ApplicationController
   # end
 
   def remove_member
-    @member = User.find params[:user_id]
-    @group = Group.find params[:group_id] # not :id. see routes
-    @group.users.delete(@member)
+    member = User.find params[:user_id]
+    group = Group.find params[:group_id] # not :id. see routes
+    member.agendas.where(:group_id => group.id).delete_all # remove associated agenda
+    group.users.delete(member)
 
     output = {'status' => 'ok'}.to_json
     render json: output
