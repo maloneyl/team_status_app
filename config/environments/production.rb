@@ -51,6 +51,24 @@ TeamStatusApp::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
+  # Devise setup
+  config.action_mailer.default_url_options = { :host => 'team-status-app.herokuapp.com' }
+
+  # Mail setup in general
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+
+  # Mandrill settings
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.mandrillapp.com',
+    port: 25, # this is what Mandrill uses for Ruby on Rails
+    enable_starttls_auto: true,
+    user_name: ENV['MANDRILL_USERNAME'],
+    password: ENV['MANDRILL_API_KEY'] # API key
+  }
+
   # Enable threaded mode
   # config.threadsafe!
 
