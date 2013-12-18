@@ -20,7 +20,7 @@ class UsersController < Devise::RegistrationsController
     @mentions = @mentions.sort_by(&:created_at).reverse
 
     # get agendas
-    @agendas = @user.agendas.all(:order => 'updated_at DESC')
+    @agendas = @user.agendas.where("body IS NOT NULL").all(:order => 'updated_at DESC')
 
     # get items for reports
     @trackable_items_today = @user.statuses.trackable.today rescue nil

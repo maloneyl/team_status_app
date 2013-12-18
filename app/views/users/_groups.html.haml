@@ -10,4 +10,6 @@
         - else
           %li= link_to "#{group.name} (Member)", group_path(group)
   - else
-    You haven't joined any groups yet!
+    You haven't joined any groups.
+    %br/
+    = link_to "Start a Group", new_group_path
