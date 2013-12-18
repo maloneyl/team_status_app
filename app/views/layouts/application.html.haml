@@ -4,7 +4,7 @@
     %title TeamStatusApp
     = stylesheet_link_tag    'application', :media => 'all'
     = javascript_include_tag 'application'
-    = javascript_include_tag '//www.google.com/jsapi', 'chartkick'
+    = yield(:javascripts)
     = csrf_meta_tags
   %body
     %nav

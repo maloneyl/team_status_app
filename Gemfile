@@ -18,6 +18,8 @@ gem 'devise'
 
 gem 'chartkick'
 
+gem 'gruff', '~> 0.5.1'
+
 gem 'carrierwave'
 gem 'fog', '~> 1.3.1'
 
@@ -41,7 +43,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
-
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'faker'

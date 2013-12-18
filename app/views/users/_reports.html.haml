@@ -4,7 +4,7 @@
 %h3 Today
 
 - if @items_today.present?
-  = bar_chart @items_today.group(:body).sum(:time_tracked)
+  = column_chart @items_today.group(:body).sum(:time_tracked)
   / = pie_chart @user.statuses.tracakble.group(:body).count
 
   .users-reports-today-list
