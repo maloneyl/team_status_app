@@ -14,8 +14,6 @@
       = render 'agendas'
     .groups-statuses-section
       = render 'statuses'
-    - if @is_owner == true
-      %p= link_to 'Edit Group/Members', edit_group_path(@group)
   - else
     This is not the group you're looking for...
 - else
