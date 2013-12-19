@@ -4,6 +4,7 @@ $(function() {
 
   $(".remove-from-group").on("click", removeGroupMember);
   $(".delete-status-link").on("click", removeStatus);
+  $(".group-status-list-item-tracking-link").on("click", updateStatusTracking);
 
   // $("#status-form").submit(function(e) {
   //   e.preventDefault();
@@ -130,6 +131,28 @@ $(function() {
     })
   }
 
+  function updateStatusTracking() {
+    var $this = $(this);
+    var groupId = $this.data('group-id');
+    var statusId = $this.data('status-id');
+    var url = '/groups/' + groupId + '/statuses/' + statusId + '/switch_tracking';
 
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      dataType: "json",
+      success: function() {
+        console.log('Timer stopped!');
+        // still need to change 'in progress' to 'done'
+        // $this.closest('div').find('.group-status-list-item-in-progress').hide();
+        // $this.closest('div').find('.group-status-list-item-in-progress').removeClass().html("<span class='group-status-list-item-done'>done</span>");
+        $this.closest('div').find('.group-status-list-item-in-progress').removeClass().addClass('group-status-list-item-done').text('done');
+        $this.hide();
+      },
+      error: function() {
+        console.log('Error!');
+      }
+    })
+  }
 
 });

@@ -168,6 +168,16 @@ body {
   padding: 5px 0px 5px 0px;
 }
 
+.group-status-list-item-in-progress, .group-status-list-item-done {
+  font-size: 12px;
+  font-family: 'Archivo Narrow', sans-serif;
+  text-transform: uppercase;
+  background-color: white;
+  color: purple;
+  padding: 2px;
+  border: 2px solid purple;
+}
+
 .group-agenda-item {
   margin-bottom: 10px;
 }

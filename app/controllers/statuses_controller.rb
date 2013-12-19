@@ -50,8 +50,11 @@ class StatusesController < ApplicationController
     group = Group.find params[:group_id]
     status = Status.find params[:id]
     status.tracking = !status.tracking
-    status.save!
-    redirect_to group_path(status.group_id)
+    # redirect_to group_path(status.group_id)
+    if status.save!
+      output = {'status' => 'ok'}.to_json
+      render json: output
+    end
   end
 
 
