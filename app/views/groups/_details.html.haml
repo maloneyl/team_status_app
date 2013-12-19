@@ -1,3 +1,8 @@
+- if @group.errors.any?
+  .alert
+    - @group.errors.full_messages.each do |msg|
+      = msg
+
 = form_for(@group, html: {id: 'group-details-form'}) do |f|
   %fieldset
     %legend Group Details
@@ -6,8 +11,8 @@
       = f.text_field :name
       %br/
     .field
-      Add User to Group
-      = select_tag 'person', options_from_collection_for_select(@possible_users_to_add, 'id', 'full_name'), :include_blank => true
+      = label_tag  :person, 'Add User to Group'
+      = select_tag :person, options_from_collection_for_select(@possible_users_to_add, 'id', 'full_name'), :include_blank => true
       %br/
     .actions
       = f.submit

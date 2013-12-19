@@ -19,7 +19,7 @@ class UsersController < Devise::RegistrationsController
     end
     @mentions = @mentions.sort_by(&:created_at).reverse
 
-    # get agendas
+    # get agendas (excluding initial empty ones)
     @agendas = @user.agendas.where("body IS NOT NULL").all(:order => 'updated_at DESC')
 
     # get items for reports
@@ -46,11 +46,6 @@ class UsersController < Devise::RegistrationsController
         status.update_column(:time_tracked, time) # skip after_save and also no updated_at
       end
     end
-  end
-
-  def update
-    super
-    @user.save!
   end
 
 end

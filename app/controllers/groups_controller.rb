@@ -12,10 +12,12 @@ class GroupsController < ApplicationController
     @group.owner_id = current_user.id
     @group.users << current_user
     @group.users << User.find(params[:person]) if params[:person].present?
+
     if @group.save
       redirect_to @group
     else
-      render :new
+      @possible_users_to_add = User.all(:conditions => ["id != ?", current_user.id]) # need to redo this; 'nil' otherwise
+      render :new # just rendering view
     end
   end
 
@@ -38,13 +40,19 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find params[:id]
+
     @members = @group.users
     @owner = User.find @group.owner_id
     @is_owner = true if @group.owner_id == current_user.id rescue nil
     @is_member = true if @group.users.where(:id => current_user.id).present? rescue nil
+
     @agenda = current_user.agendas.where(:group_id => @group.id).first_or_create if @group.users.include?(current_user)
     @agendas = @group.agendas.all(:order => 'user_id, updated_at DESC')
-    @statuses = @group.statuses.all(:order => 'created_at DESC')
+
+    page = params[:page] || 1
+    per_page = 10
+    # @statuses = @group.statuses.all(:order => 'created_at DESC')
+    @statuses = @group.statuses.paginate(:page => page, :per_page => per_page).all(:order => 'created_at DESC')
   end
 
   # def get_statuses
