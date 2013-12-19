@@ -3,15 +3,8 @@
 
 %h3 Today
 
-<<<<<<< HEAD
-- if @items_today.present?
-  = column_chart @items_today.group(:body).sum(:time_tracked)
-  / = pie_chart @user.statuses.tracakble.group(:body).count
-
-=======
 - if @trackable_items_today.present?
   = pie_chart @trackable_items_today.group(:body).sum(:time_tracked)
->>>>>>> staging
   .users-reports-today-list
     - @trackable_items_today.sort_by(&:updated_at).reverse.each do |status|
       .users-reports-today-list-item
