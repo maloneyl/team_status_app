@@ -117,7 +117,7 @@ body {
   width: 60%;
 }
 
-#add-status-form {
+#add-status-form, #group-details-form, #edit-user-form, #user-sign-up-form {
   fieldset {
     border: 3px dotted purple;
   }
