@@ -14,7 +14,7 @@ class StatusesController < ApplicationController
     @status.user_id = current_user.id
     @status.tracked = @status.tracking
 
-    if @status.save!
+    if @status.save! && @status.tracking
       # avoid double-counting: stop any running timer
       statuses_to_update = current_user.statuses.where(:tracking => true).all
       if statuses_to_update.any?
