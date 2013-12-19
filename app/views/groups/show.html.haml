@@ -14,6 +14,7 @@
       = render 'agendas'
     .groups-statuses-section
       = render 'statuses'
+    = will_paginate @statuses
   - else
     This is not the group you're looking for...
 - else
