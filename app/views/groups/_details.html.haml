@@ -16,3 +16,8 @@
       %br/
     .actions
       = f.submit
+
+  - if params[:id].present?
+    %p
+    .edit-group-delete-link
+      = link_to 'Remove Group', @group, :method => :delete, :confirm => "Are you sure? All its associated data will be gone!"

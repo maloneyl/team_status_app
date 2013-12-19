@@ -75,4 +75,11 @@ class GroupsController < ApplicationController
     output = {'status' => 'ok'}.to_json
     render json: output
   end
+
+  def destroy
+    group = Group.find params[:id]
+    group.destroy
+    redirect_to user_path(current_user)
+  end
+
 end

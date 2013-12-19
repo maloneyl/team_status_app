@@ -362,9 +362,11 @@ form.edit_user {
   }
 }
 
-  // * html .pagination {
-  //   height: 1%;
-  // }
-  // *:first-child + html .pagination {
-  //   overflow: hidden;
-  // }
+.edit-group-delete-link {
+  a {
+    color: #1874cd;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
