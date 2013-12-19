@@ -51,6 +51,7 @@ class UsersController < Devise::RegistrationsController
   end
 
   protected
+
   def after_update_path_for(resource) # default devise behavior after account update is to redirect to root_path
     user_path(resource)
   end

@@ -3,7 +3,9 @@ $(function() {
   $(".individual-agenda-editable").on("click", editAgenda);
 
   $(".remove-from-group").on("click", removeGroupMember);
+
   $(".delete-status-link").on("click", removeStatus);
+
   $(".group-status-list-item-tracking-link").on("click", updateStatusTracking);
 
   // $("#status-form").submit(function(e) {

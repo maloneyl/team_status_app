@@ -12,6 +12,9 @@
           - if @is_owner == true
             %button.remove-from-group{"data-group-id" => "#{@group.id}", "data-member-id" => "#{member.id}"}= "Remove from Group"
 
-.group-admin-edit-link
-  - if @is_owner == true
+- if @is_owner == true
+  .group-admin-edit-link
     = link_to 'Add Member/Edit Group Name', edit_group_path(@group)
+/ - else
+/   .group-member-leave-group-link
+/     = link_to "Leave Group", "#", "data-group-id" => "#{@group.id}", "data-member-id" => "#{current_user.id}"
