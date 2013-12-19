@@ -97,18 +97,21 @@ $(function() {
     var memberId = $this.data('member-id');
     var url = '/groups/' + groupId + '/remove_member/' + memberId;
 
-    $.ajax({
-      url: url,
-      type: 'PUT',
-      dataType: "json",
-      success: function() {
-        console.log('Removed!');
-        $this.closest(".group-members-list-item-regular").hide();
-      },
-      error: function() {
-        console.log('Error!');
-      }
-    })
+    if (confirm("Are you sure?")) {
+      $.ajax({
+        url: url,
+        type: 'PUT',
+        dataType: "json",
+        success: function() {
+          console.log('Removed!');
+          $this.closest(".group-members-list-item-regular").hide();
+        },
+        error: function() {
+          console.log('Error!');
+        }
+      })
+    }
+    return false;
   }
 
   function removeStatus() {
@@ -117,18 +120,21 @@ $(function() {
     var statusId = $this.data('status-id');
     var url = '/groups/' + groupId + '/statuses/' + statusId;
 
-    $.ajax({
-      url: url,
-      type: 'DELETE',
-      dataType: "json",
-      success: function() {
-        console.log('Removed!');
-        $this.closest(".group-status-list-item").hide();
-      },
-      error: function() {
-        console.log('Error!');
-      }
-    })
+    if (confirm("Are you sure? All its associated data will be gone!")) {
+      $.ajax({
+        url: url,
+        type: 'DELETE',
+        dataType: "json",
+        success: function() {
+          console.log('Removed!');
+          $this.closest(".group-status-list-item").hide();
+        },
+        error: function() {
+          console.log('Error!');
+        }
+      })
+    }
+    return false;
   }
 
   function updateStatusTracking() {
@@ -137,19 +143,21 @@ $(function() {
     var statusId = $this.data('status-id');
     var url = '/groups/' + groupId + '/statuses/' + statusId + '/switch_tracking';
 
-    $.ajax({
-      url: url,
-      type: 'PUT',
-      dataType: "json",
-      success: function() {
-        console.log('Timer stopped!');
-        $this.closest('div').find('.group-status-list-item-in-progress').removeClass().addClass('group-status-list-item-done').text('done');
-        $this.hide();
-      },
-      error: function() {
-        console.log('Error!');
-      }
-    })
+    if (confirm("Are you sure?")) {
+      $.ajax({
+        url: url,
+        type: 'PUT',
+        dataType: "json",
+        success: function() {
+          console.log('Timer stopped!');
+          $this.closest('div').find('.group-status-list-item-in-progress').removeClass().addClass('group-status-list-item-done').text('done');
+          $this.hide();
+        },
+        error: function() {
+          console.log('Error!');
+        }
+      })
+    }
+    return false;
   }
-
 });
