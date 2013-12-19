@@ -9,7 +9,7 @@ class Status < ActiveRecord::Base
   belongs_to :project
   has_many :durations, :dependent => :destroy
 
-  after_save :update_duration # need to skip this if it's just .time_tracked that's changed... how?
+  after_save :update_duration
 
   def update_duration
     if self.tracked == true
