@@ -32,6 +32,7 @@ h2, h3 {
 body {
   font-family: 'Roboto';
   padding-top: 30px; // to not be covered up by sticky top nav
+  margin: 8px 20px 20px 20px;
 }
 
 .home-tagline {
@@ -260,8 +261,110 @@ button.remove-from-group {
   text-transform: uppercase;
 }
 
-// @media (max-width: 979px) {
-//   body {
-//     padding-top: 0px;
+.notice {
+  font-family: 'Archivo Narrow', sans-serif;
+  color: purple;
+}
+
+.alert {
+  font-family: 'Archivo Narrow', sans-serif;
+  color: red;
+}
+
+#error_explanation {
+  font-family: 'Archivo Narrow', sans-serif;
+  color: red;
+
+  h2 { // devise has it as h2
+    font-size: 1.2em; // regularly 1.5em
+  }
+}
+
+form.edit_user {
+
+}
+
+// .pagination {
+//   font-family: 'Archivo Narrow', sans-serif;
+//   font-size: 1em;
+//   text-transform: uppercase;
+//   a {
+//     color: purple;
+//     text-decoration: none;
+
+//     &:hover {
+//       text-decoration: underline;
+//     }
 //   }
 // }
+
+.pagination {
+  background: white;
+  cursor: default;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 0.8em;
+  text-transform: uppercase;
+
+  /* self-clearing method: */
+
+  a, span, em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px;
+  }
+
+  .disabled {
+    color: #999999;
+    border: 1px solid #dddddd;
+  }
+
+  .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #1874cd; // #2e6ab1
+    color: white;
+    border: 1px solid #1874cd;
+  }
+
+  a {
+    text-decoration: none;
+    color: #1874cd; // #105cb6
+    border: 1px solid #9aafe5; // #9aafe5
+
+    &:hover, &:focus {
+      color: purple; // 000033
+      border-color: purple; // 000033
+    }
+  }
+
+  // .page_info {
+  //   background: #2e6ab1;
+  //   color: white;
+  //   padding: 0.4em 0.6em;
+  //   width: 22em;
+  //   margin-bottom: 0.3em;
+  //   text-align: center;
+
+  //   b {
+  //     color: #000033;
+  //     background: #6aa6ed;
+  //     padding: 0.1em 0.25em;
+  //   }
+  // }
+
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+  // * html .pagination {
+  //   height: 1%;
+  // }
+  // *:first-child + html .pagination {
+  //   overflow: hidden;
+  // }
