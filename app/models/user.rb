@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :first_name, :last_name, :username, :password, :password_confirmation, :remember_me
 
+  validates_uniqueness_of :username
+
   has_and_belongs_to_many :groups
   has_many :statuses
   has_many :agendas

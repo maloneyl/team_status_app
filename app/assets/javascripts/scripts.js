@@ -143,9 +143,6 @@ $(function() {
       dataType: "json",
       success: function() {
         console.log('Timer stopped!');
-        // still need to change 'in progress' to 'done'
-        // $this.closest('div').find('.group-status-list-item-in-progress').hide();
-        // $this.closest('div').find('.group-status-list-item-in-progress').removeClass().html("<span class='group-status-list-item-done'>done</span>");
         $this.closest('div').find('.group-status-list-item-in-progress').removeClass().addClass('group-status-list-item-done').text('done');
         $this.hide();
       },
