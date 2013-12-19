@@ -5,14 +5,14 @@ class Status < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
   belongs_to :project
-  has_many :durations
+  has_many :durations, :dependent => :destroy
 
-  after_save :update_duration
+  after_save :update_duration # need to skip this if it's just .time_tracked that's changed... how?
 
   def update_duration
     if self.tracked == true
       if self.durations.last.present?
-        duration_to_add = self.updated_at - self.durations.last.updated_at
+        duration_to_add = (self.updated_at - self.durations.last.updated_at).to_i
       else
         duration_to_add = 0
       end

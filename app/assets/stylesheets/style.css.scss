@@ -147,16 +147,29 @@ body {
   padding: 15px;
   margin-bottom: 15px;
   display: block;
+
+  a {
+    color: #1874cd;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+  }
 }
 
 .group-status-list-item-body-mention {
   background-color: #fff68f;
   color: black;
   font-family: 'Bitter', serif;
+  padding: 5px;
 }
 
 .group-status-list-item-body-regular, .individual-agenda-editable, .individual-agenda {
   font-family: 'Bitter', serif;
+  padding: 5px 0px 5px 0px;
+}
+
+.group-agenda-item {
+  margin-bottom: 10px;
 }
 
 .users-groups-list {
@@ -204,7 +217,7 @@ body {
   display: inline-block;
 }
 
-.users-agendas-list-item, .users-reports-today-list-item, .users-reports-yesteday-list-item {
+.users-agendas-list-item, .users-reports-today-list-item, .users-reports-yesterday-list-item {
   margin-bottom: 10px;
 
   a {
@@ -218,6 +231,23 @@ body {
   position: relative;
   width: 70%;
   margin-bottom: 20px;
+}
+
+.group-admin-edit-link {
+  a {
+    color: #1874cd;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+button.remove-from-group {
+  width: 70%;
+  background-color: purple;
+  color: white;
+  font-family: 'Archivo Narrow', sans-serif;
+  text-transform: uppercase;
 }
 
 // @media (max-width: 979px) {

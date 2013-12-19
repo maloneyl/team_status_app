@@ -2,57 +2,58 @@ $(function() {
 
   $(".individual-agenda-editable").on("click", editAgenda);
 
-  $("#remove-from-group").on("click", removeGroupMember);
+  $(".remove-from-group").on("click", removeGroupMember);
+  $(".delete-status-link").on("click", removeStatus);
 
-  $("#status-form").submit(function(e) {
-    e.preventDefault();
+  // $("#status-form").submit(function(e) {
+  //   e.preventDefault();
 
-    var groupId = $("#group_id").val();
-    var $statusBody = $("#status_body");
-    var statusBodyVal = $statusBody.val();
+  //   var groupId = $("#group_id").val();
+  //   var $statusBody = $("#status_body");
+  //   var statusBodyVal = $statusBody.val();
 
-    if ($("#status_tracking").is(':checked')) {
-      var statusTracking = 1;
-    } else {
-      var statusTracking = 0;
-    }
+  //   if ($("#status_tracking").is(':checked')) {
+  //     var statusTracking = 1;
+  //   } else {
+  //     var statusTracking = 0;
+  //   }
 
-    $.ajax({
-      url: "/groups/" + groupId + "/statuses",
-      type: "POST",
-      dataType: "json",
-      data: {
-        status: {
-          body: statusBodyVal,
-          tracking: statusTracking
-        },
-        group_id: groupId
-      },
-      success: function(response) {
-        if (response.status == "ok") {
-          console.log(response.username);
-          location.onload(); // still need to reconstruct the view
+  //   $.ajax({
+  //     url: "/groups/" + groupId + "/statuses",
+  //     type: "POST",
+  //     dataType: "json",
+  //     data: {
+  //       status: {
+  //         body: statusBodyVal,
+  //         tracking: statusTracking
+  //       },
+  //       group_id: groupId
+  //     },
+  //     success: function(response) {
+  //       if (response.status == "ok") {
+  //         console.log(response.username);
+  //         // still need to reconstruct the view
 
-          // no-go:
-          // $(".group-status-list").load("/groups/" + groupId + "/get_statuses")
+  //         // no-go:
+  //         // $(".group-status-list").load("/groups/" + groupId + "/get_statuses")
 
-          // var $groupStatusList = $(".group-status-list");
-          // var $listItem = $("<div class='group-status-list-item'>");
+  //         // var $groupStatusList = $(".group-status-list");
+  //         // var $listItem = $("<div class='group-status-list-item'>");
 
-          // var $listItemBody = $("<div class='group-status-list-item-body-regular'>");
-          // $listItemBody.html(status_body_val);
+  //         // var $listItemBody = $("<div class='group-status-list-item-body-regular'>");
+  //         // $listItemBody.html(status_body_val);
 
-          // $listItem.append($listItemBody);
+  //         // $listItem.append($listItemBody);
 
-          // $groupStatusList.prepend($listItem);
+  //         // $groupStatusList.prepend($listItem);
 
-          // $statusBody.val("");
-        } else {
-          // tell the user that an error occurred
-        }
-      }
-    });
-  });
+  //         // $statusBody.val("");
+  //       } else {
+  //         // tell the user that an error occurred
+  //       }
+  //     }
+  //   });
+  // });
 
   function editAgenda() {
     var $this = $(this);
@@ -101,12 +102,34 @@ $(function() {
       dataType: "json",
       success: function() {
         console.log('Removed!');
-        location.onload(); // update this and reconstruct the view...
+        $this.closest(".group-members-list-item-regular").hide();
       },
       error: function() {
         console.log('Error!');
       }
     })
   }
+
+  function removeStatus() {
+    var $this = $(this);
+    var groupId = $this.data('group-id');
+    var statusId = $this.data('status-id');
+    var url = '/groups/' + groupId + '/statuses/' + statusId;
+
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      dataType: "json",
+      success: function() {
+        console.log('Removed!');
+        $this.closest(".group-status-list-item").hide();
+      },
+      error: function() {
+        console.log('Error!');
+      }
+    })
+  }
+
+
 
 });

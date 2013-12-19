@@ -3,12 +3,17 @@
 
 %h3 Today
 
+<<<<<<< HEAD
 - if @items_today.present?
   = column_chart @items_today.group(:body).sum(:time_tracked)
   / = pie_chart @user.statuses.tracakble.group(:body).count
 
+=======
+- if @trackable_items_today.present?
+  = pie_chart @trackable_items_today.group(:body).sum(:time_tracked)
+>>>>>>> staging
   .users-reports-today-list
-    - @items_today.each do |status|
+    - @trackable_items_today.sort_by(&:updated_at).reverse.each do |status|
       .users-reports-today-list-item
         = status.body
         %br/
@@ -21,16 +26,17 @@
 
 %h3 Yesterday
 
-- if @items_yesterday.present?
-  = bar_chart @items_yesterday.group(:body).sum(:time_tracked)
+- if @trackable_items_yesterday.present?
+  = pie_chart @trackable_items_yesterday.group(:body).sum(:time_tracked)
 
   .users-reports-yesterday-list
-    - @items_yesterday.each do |status|
-      %li
+    - @trackable_items_yesterday.sort_by(&:updated_at).reverse.each do |status|
+      .users-reports-yesterday-list-item
         = status.body
-        \|
+        %br/
         = link_to status.group.name, group_path(status.group)
         \|
-        = distance_of_time_in_words(status.time_tracked)
+        %i= distance_of_time_in_words(status.time_tracked)
+        %i= "and counting" if status.tracking?
 - else
   Nothing here...

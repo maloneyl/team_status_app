@@ -32,4 +32,5 @@
         - if message.user_id == current_user.id && message.tracking
           = link_to "Done? Stop timer", switch_tracking_group_status_path(@group, message), :method => :put
       - if message.user_id == current_user.id
-        = link_to "Delete", [@group, message], :method => :delete, :confirm => "Are you sure?"
+        / = link_to "Delete (Rails)", [@group, message], :method => :delete, :confirm => "Are you sure?"
+        = link_to "Delete", "#", :class => 'delete-status-link', "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"

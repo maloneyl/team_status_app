@@ -1,18 +1,16 @@
 class Statuses < ActiveRecord::Migration
-  def up
+  def change
     create_table :statuses do |t|
       t.text :body
       t.boolean :tracking
-      t.integer :duration # number of seconds
-      t.datetime :previously_updated_at
+      t.boolean :tracked
+      t.integer :time_tracked # number of seconds
       t.timestamps # :created_at, :modified_at
       t.belongs_to :user
-      t.belongs_to :project
       t.belongs_to :group
     end
-  end
 
-  def down
-    drop_table :statuses
+    add_index :statuses, :user_id
+    add_index :statuses, :group_id
   end
 end

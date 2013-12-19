@@ -9,39 +9,41 @@ class UsersController < Devise::RegistrationsController
   def show
     @user = User.find params[:id]
 
-    if user_signed_in?
-      @mentions = []
-      @groups = @user.groups
-      @groups.each do |group|
-        group.statuses.with_mentions.each do |status|
-          @mentions << status if status.at_user == current_user.username || status.at_user == "all"
-        end
+    # get groups and mentions
+    @mentions = []
+    @groups = @user.groups
+    @groups.each do |group| # this makes sure mentions from user's old groups are excluded
+      group.statuses.with_mentions.each do |status|
+        @mentions << status if status.at_user == current_user.username || status.at_user == "all"
       end
-      @mentions = @mentions.sort_by(&:created_at).reverse
+    end
+    @mentions = @mentions.sort_by(&:created_at).reverse
 
-      @agendas = @user.agendas
+    # get agendas
+    @agendas = @user.agendas.where("body IS NOT NULL").all(:order => 'updated_at DESC')
 
-      @items_today = @user.statuses.trackable.today rescue nil
-      @items_yesteday = @user.statuses.trackable.yesterday rescue nil
+    # get items for reports
+    @trackable_items_today = @user.statuses.trackable.today rescue nil
+    @trackable_items_yesterday = @user.statuses.trackable.yesterday rescue nil
 
-      # update duration if tracking
-      if @items_today.present?
-        @items_today.each do |status|
-          if status.tracking?
-            if status.durations.last.present?
-              status.time_tracked = status.durations.today.sum(:time_elapsed) + (Time.now - status.durations.today.last.updated_at).to_i
-            else
-              status.time_tracked = (Time.now - status.durations.today.last.updated_at).to_i
-            end
-            status.save!
-          end
+    # update item duration if still tracking
+    # get status.durations._.time_elapsed into status.time_tracked for today's items
+    if @trackable_items_today.present?
+      @trackable_items_today.each do |status|
+        if status.tracking?
+          time = status.durations.today.sum(:time_elapsed) + (Time.now - status.durations.today.last.updated_at).to_i
+        else
+          time = status.durations.today.sum(:time_elapsed)
         end
+        status.update_column(:time_tracked, time) # skip after_save and also no updated_at
       end
+    end
 
-      if @items_yesterday.present?
-        @items_yesterday.each do |status|
-          status.time_tracked = status.durations.yesterday.sum(:time_elapsed)
-        end
+    # get status.durations._.time_elapsed into status.time_tracked for yesterday's items
+    if @items_yesterday.present?
+      @items_yesterday.each do |status|
+        time = status.durations.yesterday.sum(:time_elapsed)
+        status.update_column(:time_tracked, time) # skip after_save and also no updated_at
       end
     end
   end

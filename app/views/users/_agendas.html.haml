@@ -5,12 +5,11 @@
   - if @agendas.any?
     - @agendas.each do |agenda|
       .users-agendas-list-item
-        - if agenda.body.present?
-          = link_to agenda.group.name, group_path(agenda.group)
-          \|
-          %i= agenda.updated_at
-          %br/
-          = agenda.body
+        = link_to agenda.group.name, group_path(agenda.group)
+        \|
+        %i= agenda.updated_at
+        %br/
+        = agenda.body
   - else
     You don't have anything on your agenda yet.
 

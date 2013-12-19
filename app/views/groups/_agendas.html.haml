@@ -2,21 +2,19 @@
   .section-heading
     Today's Agenda
   %p
-    Please update your agenda daily by clicking on the content. You can only edit your own.
-  - @members.each do |member|
+    %i Please update your agenda daily by clicking on the content. You can only edit your own.
+  - @agendas.each do |agenda|
     .group-agenda-item
-      %b= member.full_name
-      - agenda = member.agendas.where(:group_id => @group.id).last
-      - if member == current_user
+      %b= agenda.user.full_name
+      - if agenda.user == current_user
         .individual-agenda-editable{"data-group-id" => "#{@group.id}", "data-agenda-id" => "#{agenda.id}", "data-agenda-body" => "#{agenda.body}"}
-          - if agenda.body.present? && !agenda.body.empty?
+          - if agenda.body?
             = agenda.body
           - else
             (Click to add...)
       - else
         .individual-agenda
-          - if agenda.present?
-            = agenda.body if agenda.present?
+          - if agenda.body?
+            = agenda.body
           - else
             (None entered yet.)
-    %br/

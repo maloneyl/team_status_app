@@ -1,3 +1,5 @@
+require 'json'
+
 class GroupsController < ApplicationController
 
   def new
@@ -45,11 +47,11 @@ class GroupsController < ApplicationController
     @statuses = @group.statuses.all(:order => 'created_at DESC')
   end
 
-  def get_statuses
-    group = Group.find params[:group_id]
-    @statuses = group.statuses.all(:order => 'created_at DESC') # @group.statuses.sort_by(&:created_at).reverse
-    render :partial => '/groups/statuses'
-  end
+  # def get_statuses
+  #   group = Group.find params[:group_id]
+  #   @statuses = group.statuses.all(:order => 'created_at DESC') # @group.statuses.sort_by(&:created_at).reverse
+  #   render :partial => '/groups/statuses'
+  # end
 
   # def day_archive
   #   @day = "something" # need to figure out how to get the day
@@ -59,10 +61,18 @@ class GroupsController < ApplicationController
   def remove_member
     member = User.find params[:user_id]
     group = Group.find params[:group_id] # not :id. see routes
+<<<<<<< HEAD
     member.agendas.where(:group_id => group.id).delete_all
+=======
+    member.agendas.where(:group_id => group.id).delete_all # remove associated agenda
+>>>>>>> staging
     group.users.delete(member)
 
     output = {'status' => 'ok'}.to_json
     render json: output
   end
+<<<<<<< HEAD
+=======
+
+>>>>>>> staging
 end

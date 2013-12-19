@@ -9,7 +9,6 @@
 User.delete_all
 Group.delete_all
 Status.delete_all
-Project.delete_all
 
 u1 = User.create!(:email => 'maloney.liu@gmail.com', :first_name => 'Maloney', :last_name => 'Liu', :username => 'maloney', :password => 'maloney', :password_confirmation => 'maloney')
 u1.confirmed_at = u1.created_at + 2.seconds
