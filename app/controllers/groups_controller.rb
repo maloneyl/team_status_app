@@ -12,10 +12,12 @@ class GroupsController < ApplicationController
     @group.owner_id = current_user.id
     @group.users << current_user
     @group.users << User.find(params[:person]) if params[:person].present?
+
     if @group.save
       redirect_to @group
     else
-      render :new
+      @possible_users_to_add = User.all(:conditions => ["id != ?", current_user.id]) # need to redo this; 'nil' otherwise
+      render :new # just rendering view
     end
   end
 
