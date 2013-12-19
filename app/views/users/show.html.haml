@@ -1,5 +1,6 @@
-- content_for :javascripts do
-  = javascript_include_tag '//www.google.com/jsapi', 'chartkick'
+:javascript
+  setTimeout(function(){ location = '' }, 300000)
+  / 1000 = 1 second
 
 - if user_signed_in?
   - if current_user == @user
