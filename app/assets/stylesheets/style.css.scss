@@ -117,7 +117,7 @@ body {
   width: 60%;
 }
 
-#add-status-form, #group-details-form, #edit-user-form, #user-sign-up-form {
+#add-status-form, #group-details-form, #edit-user-form, #user-sign-up-form, #user-sign-in-form {
   fieldset {
     border: 3px dotted purple;
   }
@@ -362,7 +362,7 @@ form.edit_user {
   }
 }
 
-.edit-group-delete-link {
+.edit-group-delete-link, .devise-links {
   a {
     color: #1874cd;
     font-size: 14px;

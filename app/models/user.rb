@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
 
   has_and_belongs_to_many :groups
-  has_many :statuses
-  has_many :agendas
+  has_many :statuses # no :dependent => :destroy because you might want the progress
+  has_many :agendas, :dependent => :destroy
 
   def full_name
    "#{self.first_name} #{self.last_name}"

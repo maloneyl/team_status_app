@@ -14,7 +14,9 @@ class UsersController < Devise::RegistrationsController
     @groups = @user.groups
     @groups.each do |group| # this makes sure mentions from user's old groups are excluded
       group.statuses.with_mentions.each do |status|
-        @mentions << status if status.at_user == current_user.username || status.at_user == "all"
+        if User.exists?(:id => status.user_id)
+          @mentions << status if status.at_user == current_user.username || status.at_user == "all"
+        end
       end
     end
     @mentions = @mentions.sort_by(&:created_at).reverse
@@ -46,6 +48,11 @@ class UsersController < Devise::RegistrationsController
         status.update_column(:time_tracked, time) # skip after_save and also no updated_at
       end
     end
+  end
+
+  protected
+  def after_update_path_for(resource) # default devise behavior after account update is to redirect to root_path
+    user_path(resource)
   end
 
 end
