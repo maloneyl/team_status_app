@@ -19,10 +19,8 @@ class StatusesController < ApplicationController
         statuses_to_update = current_user.statuses.where(:tracking => true).all
           if statuses_to_update.any?
             statuses_to_update.each do |s|
-              if s != @status
-                s.tracking = false
-                s.save!
-              end
+              s.tracking = false if s != @status
+              s.save!
             end
           end
       end

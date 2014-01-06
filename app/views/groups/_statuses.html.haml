@@ -19,7 +19,10 @@
 .group-status-list
   - @statuses.each do |message|
     .group-status-list-item
-      = "#{message.user.full_name} (@#{message.user.username})"
+      - if message.user.present?
+        = "#{message.user.full_name} (@#{message.user.username})"
+      - else
+        = "[Deleted User]"
       \|
       %i= time_ago_in_words(message.created_at) + ' ago'
       - if message.tracking?

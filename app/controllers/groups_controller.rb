@@ -51,24 +51,12 @@ class GroupsController < ApplicationController
 
     page = params[:page] || 1
     per_page = 10
-    # @statuses = @group.statuses.all(:order => 'created_at DESC')
     @statuses = @group.statuses.paginate(:page => page, :per_page => per_page).all(:order => 'created_at DESC')
   end
 
-  # def get_statuses
-  #   group = Group.find params[:group_id]
-  #   @statuses = group.statuses.all(:order => 'created_at DESC') # @group.statuses.sort_by(&:created_at).reverse
-  #   render :partial => '/groups/statuses'
-  # end
-
-  # def day_archive
-  #   @day = "something" # need to figure out how to get the day
-  #   @statuses = @group.statuses.where("created_at >= ?", @day.beginning_of_day)
-  # end
-
   def remove_member
     member = User.find params[:user_id]
-    group = Group.find params[:group_id] # not :id. see routes
+    group = Group.find params[:group_id] # not :id (see routes)
     member.agendas.where(:group_id => group.id).delete_all # remove associated agenda
     group.users.delete(member)
 
