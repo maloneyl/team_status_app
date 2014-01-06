@@ -1,6 +1,6 @@
 class Status < ActiveRecord::Base
 
-  attr_accessible :body, :tracking
+  attr_accessible :body, :tracking, :tracked, :user_id, :group_id
 
   validates_presence_of :body
 
