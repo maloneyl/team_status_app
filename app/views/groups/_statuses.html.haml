@@ -31,10 +31,10 @@
         %span.group-status-list-item-done= "done"
       - if message.at_user == current_user.username || message.at_user == "all"
         .group-status-list-item-body-mention
-          = message.body
+          = auto_link(message.body, :html => {:target => '_blank'})
       - else
         .group-status-list-item-body-regular
-          = message.body
+          = auto_link(message.body, :html => {:target => '_blank'})
       - if message.user_id == current_user.id
         - if message.tracking?
           = link_to "Done? Stop timer | ", "#", :class => "group-status-list-item-tracking-link", "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"

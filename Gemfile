@@ -25,7 +25,7 @@ gem 'fog', '~> 1.3.1'
 
 gem 'will_paginate', '~> 3.0'
 
-gem 'best_in_place'
+gem 'rails_autolink', '~> 1.1.5'
 
 # Gems used only for assets and not required
 # in production environments by default.

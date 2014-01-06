@@ -31,9 +31,6 @@ GEM
     arel (3.0.3)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
-    best_in_place (2.1.0)
-      jquery-rails
-      rails (~> 3.1)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -147,6 +144,8 @@ GEM
       activesupport (= 3.2.14)
       bundler (~> 1.0)
       railties (= 3.2.14)
+    rails_autolink (1.1.5)
+      rails (> 3.1)
     railties (3.2.14)
       actionpack (= 3.2.14)
       activesupport (= 3.2.14)
@@ -207,7 +206,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  best_in_place
   better_errors
   binding_of_caller
   capybara
@@ -226,6 +224,7 @@ DEPENDENCIES
   pg
   pry-rails
   rails (= 3.2.14)
+  rails_autolink (~> 1.1.5)
   rspec-rails
   sass-rails (~> 3.2.3)
   shoulda-matchers

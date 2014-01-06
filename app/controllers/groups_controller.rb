@@ -1,4 +1,5 @@
 require 'json'
+require 'rails_autolink'
 
 class GroupsController < ApplicationController
 
