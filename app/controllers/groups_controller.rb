@@ -44,10 +44,11 @@ class GroupsController < ApplicationController
     @members = @group.users
     @owner = User.find @group.owner_id
     @is_owner = true if @group.owner_id == current_user.id rescue nil
-    @is_member = true if @group.users.where(:id => current_user.id).present? rescue nil
+    @is_member = true if @members.where(:id => current_user.id).present? rescue nil
 
-    @agenda = current_user.agendas.where(:group_id => @group.id).first_or_create if @group.users.include?(current_user)
-    @agendas = @group.agendas.all(:order => 'user_id, updated_at DESC')
+    @members.each do |member|
+      @agendas << member.agendas.where(:group_id => @group.id).first_or_create
+    end
 
     page = params[:page] || 1
     per_page = 10
