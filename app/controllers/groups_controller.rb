@@ -46,6 +46,7 @@ class GroupsController < ApplicationController
     @is_owner = true if @group.owner_id == current_user.id rescue nil
     @is_member = true if @members.where(:id => current_user.id).present? rescue nil
 
+    @agendas = []
     @members.each do |member|
       @agendas << member.agendas.where(:group_id => @group.id).first_or_create
     end
