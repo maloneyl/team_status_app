@@ -28,10 +28,12 @@ u6 = User.create!(:email => 'john@john.com', :first_name => 'John', :last_name =
 g1 = Group.create!(:name => 'Beans Group', :owner_id => u2.id)
 g1.users << u1
 g1.users << u3
+g1.save!
 
 g2 = Group.create!(:name => 'Team Modern', :owner_id => u1.id)
 g2.users << u4
 g2.users << u5
+g2.save!
 
 #g1
 s1 = Status.create!(:body => "@all I need to leave a couple hours early today so grab me earlier if you need me!", :tracking => false, :tracked => false, :user_id => u2.id, :group_id => g1.id)
@@ -39,7 +41,7 @@ s2 = Status.create!(:body => "@belle Most likely won't have wireframes done unti
 s3 = Status.create!(:body => "Stepping out for a bit.", :tracking => false, :tracked => false, :user_id => u3.id, :group_id => g1.id)
 s4 = Status.create!(:body => "@maloney LPH staging is up - could you check the copy when you get the chance?", :tracking => false, :tracked => false, :user_id => u6.id, :group_id => g1.id)
 a1 = Agenda.create!(:body => "Launch LPH", :group_id => g1.id, :user_id => u6.id)
-a2 = Agenda.create!(:body => "Research and write proposal for XYZ", :group_id => g1.id, :user_id => u6.id)
+a2 = Agenda.create!(:body => "Research and write proposal for XYZ", :group_id => g1.id, :user_id => u2.id)
 
 # g2
 s5 = Status.create!(:body => "@maloney Thanks for setting up the new group!", :tracking => false, :tracked => false, :user_id => u4.id, :group_id => g2.id)
