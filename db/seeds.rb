@@ -27,10 +27,13 @@ u6 = User.create!(:email => 'john@john.com', :first_name => 'John', :last_name =
 
 g1 = Group.create!(:name => 'Beans Group', :owner_id => u2.id)
 g1.users << u1
+g1.users << u2
 g1.users << u3
+g1.users << u6
 g1.save!
 
 g2 = Group.create!(:name => 'Team Modern', :owner_id => u1.id)
+g2.users << u1
 g2.users << u4
 g2.users << u5
 g2.save!
