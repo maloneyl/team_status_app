@@ -2,6 +2,14 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto');
 @import url('http://fonts.googleapis.com/css?family=Archivo+Narrow');
 
+$main-serif: 'Bitter';
+$main-sans-serif: 'Roboto';
+$main-link-typeface: 'Archivo Narrow';
+
+$section-main-color: purple;
+$section-background-color: #e0e0e0;
+
+
 nav {
   position: fixed;
   width: 100%;
@@ -10,7 +18,7 @@ nav {
   border-top: 0;
   border-bottom: 10;
   z-index: 100;
-  font-family: 'Archivo Narrow';
+  font-family: $main-link-typeface;
   padding: 10px;
   background-color: black;
   color: white;
@@ -26,17 +34,17 @@ nav {
 }
 
 h2, h3 {
-  font-family: 'Bitter';
+  font-family: $main-serif, serif;
 }
 
 body {
-  font-family: 'Roboto';
+  font-family: $main-sans-serif, sans-serif;
   padding-top: 30px; // to not be covered up by sticky top nav
   margin: 10px 40px 30px 40px;
 }
 
 .home-tagline {
-  font-family: 'Bitter', serif;
+  font-family: $main-serif, serif;
   background-color: black;
   color: white;
   padding: 15px;
@@ -48,7 +56,7 @@ body {
 }
 
 .home-cta {
-  font-family: 'Bitter', serif;
+  font-family: $main-serif, serif;
   background-color: black;
   color: white;
   padding: 10px;
@@ -61,9 +69,9 @@ body {
 }
 
 .page-heading {
-  font-family: 'Bitter';
+  font-family: $main-serif, serif;
   color: white;
-  background-color: purple;
+  background-color: $section-main-color;
   font-size: 30px;
   display: inline-block;
   padding: 10px 10px 10px 10px;
@@ -71,8 +79,8 @@ body {
 }
 
 .section-heading {
-  font-family: 'Bitter';
-  color: purple;
+  font-family: $main-serif, serif;
+  color: $section-main-color;
   font-size: 24px;
   margin: 5px 0px 10px 0px;
 }
@@ -107,7 +115,7 @@ body {
   clear: both;
 
   textarea {
-    background-color: purple;
+    background-color: $section-main-color;
     color: white;
   }
 }
@@ -119,21 +127,21 @@ body {
 
 #add-status-form, #group-details-form, #edit-user-form, #user-sign-up-form, #user-sign-in-form {
   fieldset {
-    border: 3px dotted purple;
+    border: 3px dotted $section-main-color;
   }
   legend, label {
-    font-family: 'Bitter', serif;
+    font-family: $main-serif, serif;
     color: #2f4f4f;
   }
   textarea {
-    border: 1px solid purple;
+    border: 1px solid $section-main-color;
     width: 100%;
-    font-family: 'Bitter', serif;
+    font-family: $main-serif, serif;
     font-size: 16px;
   }
   input[type='submit'] {
     width: 35%;
-    background-color: purple;
+    background-color: $section-main-color;
     color: white;
     font-family: 'Archivo Narrow', sans-serif;
     text-transform: uppercase;
@@ -143,7 +151,7 @@ body {
 }
 
 .group-status-list-item {
-  background-color: #e0e0e0;
+  background-color: $section-background-color;
   border: 3px solid gray;
   padding: 15px;
   margin-bottom: 15px;
@@ -160,12 +168,12 @@ body {
 .group-status-list-item-body-mention {
   background-color: #fff68f;
   color: black;
-  font-family: 'Bitter', serif;
+  font-family: $main-serif, serif;
   padding: 5px;
 }
 
 .group-status-list-item-body-regular, .individual-agenda-editable, .individual-agenda {
-  font-family: 'Bitter', serif;
+  font-family: $main-serif, serif;
   padding: 5px 0px 5px 0px;
 }
 
@@ -176,7 +184,7 @@ body {
   background-color: white;
   color: purple;
   padding: 2px;
-  border: 2px solid purple;
+  border: 2px solid $section-main-color;
 }
 
 .group-agenda-item {
@@ -197,7 +205,7 @@ body {
 
 .users-mentions-list-item {
   background-color: #fffacd;
-  border: 5px groove #e0e0e0;
+  border: 5px groove $section-background-color;
   padding: 15px;
   margin: 0px 10px 15px 0px;
   display: inline-block;
@@ -209,11 +217,11 @@ body {
 }
 
 .users-mentions-list-item-body {
-  font-family: 'Bitter', serif;
+  font-family: $main-serif, serif;
 }
 
 .group-status-list-item {
-  background-color: #e0e0e0;
+  background-color: $section-background-color;
   border: 3px solid gray;
   padding: 15px;
   margin-bottom: 15px;
@@ -221,7 +229,7 @@ body {
 }
 
 .users-agendas-list, .users-reports-today-list, .users-reports-yesterday-list {
-  background-color: #e0e0e0;
+  background-color: $section-background-color;
   border: 3px solid gray;
   padding: 15px;
   margin-bottom: 15px;
@@ -257,22 +265,22 @@ button.remove-from-group {
   width: 70%;
   background-color: purple;
   color: white;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: $main-link-typeface, sans-serif;
   text-transform: uppercase;
 }
 
 .notice {
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: $main-link-typeface, sans-serif;
   color: purple;
 }
 
 .alert {
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: $main-link-typeface, sans-serif;
   color: red;
 }
 
 #error_explanation {
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: $main-link-typeface, sans-serif;
   color: red;
 
   h2 { // devise has it as h2
@@ -301,7 +309,7 @@ form.edit_user {
 .pagination {
   background: white;
   cursor: default;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: $main-link-typeface, sans-serif;
   font-size: 0.8em;
   text-transform: uppercase;
 
