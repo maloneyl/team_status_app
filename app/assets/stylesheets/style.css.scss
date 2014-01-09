@@ -9,7 +9,6 @@ $main-link-typeface: 'Archivo Narrow';
 $section-main-color: purple;
 $section-background-color: #e0e0e0;
 
-
 nav {
   position: fixed;
   width: 100%;
@@ -179,12 +178,16 @@ body {
 
 .group-status-list-item-in-progress, .group-status-list-item-done {
   font-size: 12px;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: $main-link-typeface, sans-serif;
   text-transform: uppercase;
   background-color: white;
   color: purple;
   padding: 2px;
   border: 2px solid $section-main-color;
+}
+
+.group-status-list-item-in-progress {
+  background-color: yellow;
 }
 
 .group-agenda-item {
