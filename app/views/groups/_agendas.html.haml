@@ -1,8 +1,8 @@
 .group-agenda-list
   .section-heading
     Today's Agenda
-  %p
-    %i Please update your agenda daily by clicking on the content. You can only edit your own.
+  %p.agenda-instructions
+    Double-click on your own agenda to edit in place.
   - @agendas.each do |agenda|
     .group-agenda-item
       %b= agenda.user.full_name

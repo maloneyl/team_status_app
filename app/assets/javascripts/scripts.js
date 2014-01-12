@@ -1,6 +1,6 @@
 $(function() {
 
-  $(".individual-agenda-editable").on("click", editAgenda);
+  $(".individual-agenda-editable").on("dblclick", editAgenda);
 
   $(".remove-from-group").on("click", removeGroupMember);
 
@@ -62,7 +62,12 @@ $(function() {
     var $this = $(this);
     var groupId = $this.data("group-id");
     var agendaId = $this.data("agenda-id");
-    var agendaBody = $this.data("agenda-body");
+    if (typeof agendaBodyNewVal == 'undefined') {
+      var agendaBody = $this.data("agenda-body");
+    } else {
+      var agendaBody = agendaBodyNewVal;
+    }
+
     var url = "/groups/" + groupId + "/agendas/" + agendaId;
     var inputbox = "<textarea rows='3' cols='30' id='agenda_body' name='agenda[name]'>";
     $this.html(inputbox + agendaBody + "</textarea>");
@@ -89,7 +94,6 @@ $(function() {
           console.log('Error!');
         }
       })
-
     });
   };
 
