@@ -53,7 +53,7 @@ class GroupsController < ApplicationController
     end
 
     page = params[:page] || 1
-    per_page = 10
+    per_page = 20
     @statuses = @group.statuses.paginate(:page => page, :per_page => per_page).all(:order => 'created_at DESC')
   end
 
