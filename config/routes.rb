@@ -16,6 +16,7 @@ TeamStatusApp::Application.routes.draw do
     resources :agendas
 
     put 'remove_member/:user_id', :to => 'groups#remove_member'
+    get 'leave_group', :to => 'groups#leave_group'
   end
 
   root :to => 'home#index'

@@ -67,6 +67,13 @@ class GroupsController < ApplicationController
     render json: output
   end
 
+  def leave_group
+    group = Group.find params[:group_id]
+    current_user.agendas.where(:group_id => group.id).delete_all
+    group.users.delete(current_user)
+    redirect_to user_path(current_user)
+  end
+
   def destroy
     group = Group.find params[:id]
     group.destroy
