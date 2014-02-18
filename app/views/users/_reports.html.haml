@@ -21,7 +21,6 @@
 
 - if @trackable_items_yesterday.present?
   = pie_chart @trackable_items_yesterday.group(:body).sum(:time_tracked)
-
   .users-reports-yesterday-list
     - @trackable_items_yesterday.sort_by(&:updated_at).reverse.each do |status|
       .users-reports-yesterday-list-item
