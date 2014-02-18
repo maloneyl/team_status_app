@@ -12,7 +12,7 @@ class Status < ActiveRecord::Base
   after_save :update_duration
 
   def update_duration
-    if self.tracked == true
+    if self.tracked?
       if self.durations.last.present?
         duration_to_add = (self.updated_at - self.durations.last.updated_at).to_i
       else
