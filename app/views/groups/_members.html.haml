@@ -4,7 +4,10 @@
 .group-members-list
   %ul
     .group-members-list-item-admin
-      %li= "#{@owner.full_name} (@#{@owner.username}) (Admin)"
+      - if @owner.nil?
+        %li [Deleted User]
+      - else
+        %li= "#{@owner.full_name} (@#{@owner.username}) (Admin)"
     - @members.each do |member|
       - if member != @owner # can't move this to line below without extra space/line when false
         %li.group-members-list-item-regular

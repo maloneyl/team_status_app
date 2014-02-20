@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
     @group = Group.find params[:id]
 
     @members = @group.users
-    @owner = User.find @group.owner_id
+    @owner = User.find @group.owner_id rescue nil
     @is_owner = true if @group.owner_id == current_user.id rescue nil
     @is_member = true if @members.where(:id => current_user.id).present? rescue nil
 
