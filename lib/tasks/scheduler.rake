@@ -1,6 +1,6 @@
 namespace :scheduler do
 
-  desc "This task is called by the Heroku scheduler add-on"
+  desc "This task is called by the Heroku scheduler add-on (every midnight UTC)"
   task :update_tracking_statuses => :environment do
     statuses = Status.where(:tracking => true).all
     if statuses.any?
@@ -14,7 +14,7 @@ namespace :scheduler do
         # move remainder portion to current day
         time_today = (Time.now - Time.now.midnight).to_i
         status_carried_forward = status.dup # create new status with same body, tracking, tracked, time_tracked, user_id, group_id
-        status_carried_forward.body = "[FROM PREVIOUS DAY] #{status_carried_forward.body}"
+        status_carried_forward.body = "[b/f] #{status_carried_forward.body}" unless status_carried_forward.body.start_with?("[b/f]")
         status_carried_forward.time_tracked = time_today
         status_carried_forward.tracking = true
         status_carried_forward.save! # will then have status id, created_at, updated_at and trigger associated duration entry
