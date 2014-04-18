@@ -5,6 +5,7 @@ class UsersController < Devise::RegistrationsController
   def create
     super
     @user.role = "member"
+    @user.username = @user.username.delete("@") if @user.username.start_with?("@")
     @user.save!
   end
 
