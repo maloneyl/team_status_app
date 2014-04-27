@@ -8,6 +8,7 @@ $main-link-typeface: 'Archivo Narrow';
 
 $section-main-color: purple;
 $section-background-color: #e0e0e0;
+$pale-yellow-background-color: #fffacd;
 
 nav {
   position: fixed;
@@ -211,11 +212,14 @@ body {
 }
 
 .users-mentions-list-item {
-  background-color: #fffacd;
-  border: 5px groove $section-background-color;
+  background-color: $pale-yellow-background-color;
+  border: 5px solid $section-background-color;
+  border-radius: 10px;
   padding: 15px;
   margin: 0px 10px 15px 0px;
   display: inline-block;
+  vertical-align: top;
+  max-width: 40%;
 
   a {
     text-decoration: none;
@@ -225,6 +229,8 @@ body {
 
 .users-mentions-list-item-body {
   font-family: $main-serif, serif;
+  color: purple;
+  word-wrap: break-word;
 }
 
 .group-status-list-item {
@@ -237,10 +243,11 @@ body {
 
 .users-agendas-list, .users-reports-today-list, .users-reports-yesterday-list {
   background-color: $section-background-color;
-  border: 3px solid gray;
+  border: 3px solid darken($section-background-color, 20%);
   padding: 15px;
   margin-bottom: 15px;
   display: inline-block;
+  width: 90%;
 }
 
 .users-agendas-list-item, .users-reports-today-list-item, .users-reports-yesterday-list-item {

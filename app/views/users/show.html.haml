@@ -5,12 +5,12 @@
   - if current_user == @user
     .users-groups-section
       = render 'groups'
+    .users-reports-section
+      = render 'reports'
     .users-mentions-section
       = render 'mentions'
     .users-agendas-section
       = render 'agendas'
-    .users-reports-section
-      = render 'reports'
   - else
     This is not the dashboard you're looking for...
 - else
