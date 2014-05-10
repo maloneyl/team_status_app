@@ -1,41 +1,46 @@
-.section-heading
-  What is everyone up to?
+.medium-6.large-8.columns
 
-= form_for([@group, @group.statuses.build], html: {id: 'add-status-form'}) do |f|
-  %fieldset
-    %legend Add a Status
-    .field
-      = f.text_area :body, :size => '50x3'
-      %br/
-    .field
-      = f.label :tracking, 'Start timer?'
-      = f.check_box :tracking
-      %br/
-    .field
-      = hidden_field_tag :group_id, @group.id
-    .actions
-      = f.submit
+  .section-heading
+    %h3 What is everyone up to?
 
-.group-status-list
-  - @statuses.each do |message|
-    .group-status-list-item
-      - if message.user.present?
-        = "#{message.user.full_name} (@#{message.user.username})"
-      - else
-        = "[Deleted User]"
-      \|
-      %i= time_ago_in_words(message.created_at) + ' ago'
-      - if message.tracking?
-        %span.group-status-list-item-in-progress= "in progress"
-      - if message.tracked? && !(message.tracking?)
-        %span.group-status-list-item-done= "done"
+  = form_for([@group, @group.statuses.build], html: {id: 'add-status-form'}) do |f|
+    %fieldset
+      %legend Add a Status
+      .field
+        = f.text_area :body, :size => '50x3'
+        %br/
+      .field
+        = f.label :tracking, 'Start timer?'
+        = f.check_box :tracking
+        %br/
+      .field
+        = hidden_field_tag :group_id, @group.id
+      .actions
+        = f.submit
+
+  .group-status-list
+    - @statuses.each do |message|
       - if message.at_user == current_user.username || message.at_user == "all"
-        .group-status-list-item-body-mention
-          = auto_link(message.body, :html => {:target => '_blank'})
+        - css_class = "callout panel group-status-mention"
       - else
-        .group-status-list-item-body-regular
-          = auto_link(message.body, :html => {:target => '_blank'})
-      - if message.user_id == current_user.id
-        - if message.tracking?
-          = link_to "Done? Stop timer | ", "#", :class => "group-status-list-item-tracking-link", "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"
-        = link_to "Delete Status", "#", :class => "delete-status-link", "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"
+        - css_class = "panel"
+      %div{:class => "#{css_class}"}
+        .group-status-list-item
+          %span.creator
+            - if message.user.present?
+              = "#{message.user.full_name} (@#{message.user.username})"
+            - else
+              = "[Deleted User]"
+            \|
+          %span.time= time_ago_in_words(message.created_at) + ' ago'
+          - if message.tracking?
+            %span.tracking-label.in-progress= "in progress"
+          - if message.tracked? && !(message.tracking?)
+            %span.tracking-label.done= "done"
+          %p.body
+            = auto_link(message.body, :html => {:target => '_blank'}) do |text|
+              - truncate(text)
+          - if message.user_id == current_user.id
+            - if message.tracking?
+              = link_to "Done? Stop timer | ", "#", :class => "group-status-list-item-tracking-link", "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"
+            = link_to "Delete Status", "#", :class => "delete-status-link", "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"

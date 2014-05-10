@@ -3,15 +3,19 @@
 
 - if user_signed_in?
   - if @is_member == true
-    .page-heading
-      = @group.name.titleize
-    .groups-members-section
-      = render 'members'
-    .groups-agendas-section
-      = render 'agendas'
-    .groups-statuses-section
-      = render 'statuses'
-    = will_paginate @statuses
+    .row
+      %h2= @group.name.titleize
+      .panel
+        = render 'members'
+    .row
+      .large-12.columns
+        .groups-statuses-section
+          = render 'statuses'
+        .groups-agendas-section
+          = render 'agendas'
+    .row
+      .large-12.columns
+        = will_paginate @statuses
   - else
     This is not the group you're looking for...
 - else

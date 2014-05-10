@@ -1,15 +1,16 @@
-.section-heading
-  On Your Agenda
-
-.users-agendas-list
-  - if @agendas.any?
-    - @agendas.each do |agenda|
-      .users-agendas-list-item
-        = link_to agenda.group.name, group_path(agenda.group)
-        \|
-        %i= agenda.updated_at
-        %br/
-        = agenda.body
-  - else
-    You don't have anything on your agenda yet.
+.medium-6.large-4.columns
+  .callout.panel.dashboard-agendas{"data-equalizer-watch" => ""}
+    %h3 On Your Agenda
+    %p
+      - if @agendas.any?
+        - @agendas.each do |agenda|
+          .users-agendas-list-item
+            %small= link_to agenda.group.name, group_path(agenda.group)
+            %small= agenda.updated_at
+            %br/
+            = agenda.body
+            - unless agenda == @agendas.last
+              %hr/
+      - else
+        You don't have anything on your agenda yet.
 

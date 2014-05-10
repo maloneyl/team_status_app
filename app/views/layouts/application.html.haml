@@ -1,30 +1,69 @@
 !!!
-%html
+%html{lang: "en"}
   %head
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
     %title TeamStatusApp
     = stylesheet_link_tag    'application', :media => 'all'
+    = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application'
     = yield(:javascripts)
     = csrf_meta_tags
+
   %body
-    %nav
-      - if user_signed_in?
-        = "Hello, #{current_user.first_name} (@#{current_user.username})!"
-        \|
-        = link_to 'Dashboard', user_path(current_user)
-        \|
-        = link_to 'New Group', new_group_path
-        \|
-        = link_to 'Account Settings', edit_user_registration_path(current_user)
-        \|
-        = link_to 'Log Out', destroy_user_session_path, :method => :delete
-      - else
-        = link_to 'Sign Up', new_user_registration_path
-        \|
-        = link_to 'Sign In', new_user_session_path
 
-    %container
-      %p.notice= notice
-      %p.alert= alert
+    - if !user_signed_in?
+      %nav.top-bar{"data-topbar" => ""}
+        %ul.title-area
+          %li.name
+            %h1.home-nav= link_to 'TeamStatusApp', root_path
+          / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+          %li.toggle-topbar.menu-icon
+            %a{href: "#"}
+        %section.top-bar-section
+          / Left Nav Section
+          %ul.left
+            %li= link_to 'Sign Up', new_user_registration_path
+            %li= link_to 'Sign In', new_user_session_path
+      %section.main-section
+        = yield
+    - else
+      .off-canvas-wrap{"data-offcanvas" => ""}
+        .inner-wrap
+          %nav.tab-bar
+            %section.left-small
+              %a.left-off-canvas-toggle.menu-icon{href: "#"}
+                %span
+            %section.middle.tab-bar-section
+              %h1.title TeamStatusApp
+          %aside.left-off-canvas-menu
+            %ul.off-canvas-list
+              %li
+                %label Your Groups
+              - current_user.groups.each do |group|
+                %li
+                  - if group.owner_id == current_user.id
+                    = link_to "#{group.name} [Admin]", group_path(group)
+                  - else
+                    = link_to group.name, group_path(group) if group.valid?
+              %li
+                %label More...
+              %li= link_to 'Start a New Group', new_group_path
+              %li= link_to 'View Your Dashboard', user_path(current_user)
+              %li
+                %label Your Account
+              %li= link_to 'Settings', edit_user_registration_path(current_user)
+              %li= link_to 'Log Out', destroy_user_session_path, :method => :delete
+              %li
+                %a{href: "#"} ...
+          %section.main-section
+            / content goes here
 
-      = yield
+            %container
+              %p.notice= notice
+              %p.alert= alert
+
+              = yield
+
+            %a.exit-off-canvas
+

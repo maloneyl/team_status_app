@@ -1,17 +1,18 @@
-- content_for :javascripts do
-  = javascript_include_tag "//www.google.com/jsapi", "chartkick"
-
 - if user_signed_in?
   - if current_user == @user
-    .users-groups-section
-      = render 'groups'
-    .users-reports-section
-      = render 'reports'
-    .users-mentions-section
+    .row{"data-equalizer" => ""}
       = render 'mentions'
-    .users-agendas-section
       = render 'agendas'
+    .row{"data-equalizer" => ""}
+      = render 'reports'
+    .row
+      .large-12.columns
+        .panel
+          "Motivational quote here."
   - else
     This is not the dashboard you're looking for...
 - else
   Please sign up or sign in.
+
+- content_for :javascripts do
+  = javascript_include_tag "http://www.google.com/jsapi", "chartkick"
