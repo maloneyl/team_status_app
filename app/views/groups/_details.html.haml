@@ -1,5 +1,5 @@
 - if @group.errors.any?
-  .alert
+  .alert-box.alert
     - @group.errors.full_messages.each do |msg|
       = msg
 
@@ -9,13 +9,11 @@
     .field
       = f.label :name
       = f.text_field :name
-      %br/
     .field
       = label_tag  :person, 'Add User to Group'
       = select_tag :person, options_from_collection_for_select(@possible_users_to_add, 'id', 'full_name'), :include_blank => true
-      %br/
     .actions
-      = f.submit
+      = f.submit :class => 'button round'
 
   - if params[:id].present?
     .edit-group-delete-link

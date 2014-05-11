@@ -1,6 +1,9 @@
-- if user_signed_in?
-  .page-heading
-    Create a Group
-  = render 'details'
-- else
-  %p Please sign up or sign in.
+.container
+  .row.clear
+  .row
+    .small-9.small-centered.medium-centered.large-centered.columns
+      - if user_signed_in?
+        %h2 Create a Group
+        = render 'details'
+      - else
+        %p Please sign up or sign in.
