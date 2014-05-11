@@ -2,7 +2,7 @@
   .callout.panel.group-agendas
     .section-heading
       %h4 Today's Agenda
-      %span.has-tip.tip-bottom.tip-left.example-time-tracking{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "Double-click on your own agenda to open the editable text box. The updated agenda is saved when you click on something else."} (How to edit?)
+      %span.has-tip.tip-top.agenda-how-to-edit{"data-tooltip" => "", title: "Double-click on your own agenda to open the editable text box. The updated agenda is saved when you click on something else."} (How to edit?)
     %p.agenda-instructions
 
     - @agendas.each do |agenda|

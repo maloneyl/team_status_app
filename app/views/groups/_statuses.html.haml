@@ -32,7 +32,7 @@
       .field
         = f.label :tracking, 'Enable time-tracking for this item?'
         = f.check_box :tracking
-        %span.has-tip.tip-bottom.tip-left.example-time-tracking{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "You might want to enable time-tracking if your status is 'Working on newsletter design', but not if it's '@all I have pizza in the kitchen!'"} (What's this?)
+        %span.has-tip.tip-right.example-time-tracking{"data-tooltip" => "", title: "You might want to enable time-tracking if your status is 'Working on newsletter design', but not if it's '@all I have pizza in the kitchen!'"} (What's this?)
       .field
         = hidden_field_tag :group_id, @group.id
       .actions

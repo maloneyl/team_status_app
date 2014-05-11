@@ -266,7 +266,7 @@ textarea#status_body, input#status_tracking {
   background-color: blue;
 }
 
-a.example-status, .has-tip.tip-bottom.tip-left.example-time-tracking {
+a.example-status, .has-tip.tip-right.example-time-tracking, .has-tip.tip-top.agenda-how-to-edit {
   font-size: 0.75rem;
   color: $primary-color;
   font-weight: bold;
