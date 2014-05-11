@@ -4,13 +4,14 @@
     %p
       - if @agendas.any?
         - @agendas.each do |agenda|
-          .users-agendas-list-item
-            %small= link_to agenda.group.name, group_path(agenda.group)
-            %small= agenda.updated_at
-            %br/
-            = agenda.body
+          .dashboard-agenda-item
+            .info
+              = link_to agenda.group.name, group_path(agenda.group)
+              \|
+              = Date.parse(agenda.updated_at.to_datetime.rfc3339).strftime("%d %B %Y")
+            .content<
+              = agenda.body
             - unless agenda == @agendas.last
               %hr/
       - else
         You don't have anything on your agenda yet.
-

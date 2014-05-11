@@ -1,27 +1,31 @@
-.group-admin
-  %p
-    - if @owner.nil?
-      Admin: [Deleted User]
-    - else
-      = "Admin: #{@owner.full_name} (@#{@owner.username})"
-
+%span.group-role Admin
+- if @owner.nil?
+  %span.group-admin [Deleted User]
+- else
+  %span.group-admin= "#{@owner.full_name} (@#{@owner.username})"
+- if @is_owner == true
+  %small.group-admin-edit-link
+    = link_to 'Add Member/Edit Group Name', edit_group_path(@group)
+.row.clear
+%span.group-role Members
 .group-members-list
-  %p Members:
-  %ul
+  %ul.inline-list.group-member
     - @members.each do |member|
       - if member != @owner # can't move this to line below without extra space/line when false
-        %li.group-members-list-item-regular
+        %li
           = "#{member.full_name} (@#{member.username})"
           - if @is_owner == true
             %small
               %a.remove-from-group{"data-group-id" => "#{@group.id}", "data-member-id" => "#{member.id}"}= "Remove from Group"
+          - elsif current_user == member
+            %small
+              .group-member-leave-group-link
+                = link_to 'Leave Group', group_leave_group_path(@group), :confirm => "Are you sure you'd like to leave this group?"
+          - else
+            %small{:style => "visibility: hidden;"} Placeholder
 
-- if @is_owner == true
-  .group-admin-edit-link
-    = link_to 'Add Member/Edit Group Name', edit_group_path(@group)
-- else
-  .group-member-leave-group-link
-    = link_to 'Leave Group', group_leave_group_path(@group), :confirm => "Are you sure?"
+
+
 / - else
 /   .group-member-leave-group-link
 /     = link_to "Leave Group", "#", "data-group-id" => "#{@group.id}", "data-member-id" => "#{current_user.id}"

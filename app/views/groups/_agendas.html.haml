@@ -2,19 +2,18 @@
   .callout.panel.group-agendas
     .section-heading
       %h4 Today's Agenda
+      %span.has-tip.tip-bottom.tip-left.example-time-tracking{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "Double-click on your own agenda to open the editable text box. The updated agenda is saved when you click on something else."} (How to edit?)
     %p.agenda-instructions
-      Double-click on your own agenda to edit in place.
+
     - @agendas.each do |agenda|
+      - if agenda.user == current_user
+        - css_class = "individual-agenda-editable"
+      - else
+        - css_class = "invidual-agenda"
       .group-agenda-item
-        %b= agenda.user.full_name
-        - if agenda.user == current_user
-          .individual-agenda-editable{"data-group-id" => "#{@group.id}", "data-agenda-id" => "#{agenda.id}", "data-agenda-body" => "#{agenda.body}"}
-            - if agenda.body?
-              = agenda.body
-            - else
-              (Click to add...)
-        - else
-          .individual-agenda
+        .creator= agenda.user.full_name
+        %div{:class => "#{css_class}", "data-group-id" => "#{@group.id}", "data-agenda-id" => "#{agenda.id}", "data-agenda-body" => "#{agenda.body}"}
+          .content<
             - if agenda.body?
               = agenda.body
             - else

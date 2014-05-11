@@ -26,6 +26,7 @@
             %li= link_to 'Sign Up', new_user_registration_path
             %li= link_to 'Sign In', new_user_session_path
       %section.main-section
+        = render 'layouts/messages'
         = yield
     - else
       .off-canvas-wrap{"data-offcanvas" => ""}
@@ -48,22 +49,14 @@
                     = link_to group.name, group_path(group) if group.valid?
               %li
                 %label More...
+              %li= link_to 'Go to Dashboard', user_path(current_user)
               %li= link_to 'Start a New Group', new_group_path
-              %li= link_to 'View Your Dashboard', user_path(current_user)
               %li
                 %label Your Account
               %li= link_to 'Settings', edit_user_registration_path(current_user)
               %li= link_to 'Log Out', destroy_user_session_path, :method => :delete
-              %li
-                %a{href: "#"} ...
           %section.main-section
-            / content goes here
-
-            %container
-              %p.notice= notice
-              %p.alert= alert
-
-              = yield
-
+            = render 'layouts/messages'
+            = yield
             %a.exit-off-canvas
 

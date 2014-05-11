@@ -1,22 +1,42 @@
 .medium-6.large-8.columns
 
-  .section-heading
-    %h3 What is everyone up to?
+  %h3 What is everyone up to?
 
   = form_for([@group, @group.statuses.build], html: {id: 'add-status-form'}) do |f|
     %fieldset
-      %legend Add a Status
+      %legend Share your latest status
       .field
+        = f.label :body, 'Current status'
+        %a{"data-reveal-id" => "myModal", href: "#", class: "example-status"} (Examples)
+        #myModal.reveal-modal.example-status{"data-reveal" => ""}
+          %h3 What should my statuses look like?
+          %p There are basically two types of statuses:
+          %ol
+            %li
+              %strong What you're working on
+              %br/
+              %em e.g.
+              %ul
+                %li Working on newsletter design
+                %li Client meeting
+            %li
+              %strong What you'd like to say to one or all of your group members
+              %br/
+              %em e.g.
+              %ul
+                %li @all Anyone have good examples of car insurance websites to share?
+                %li @foobar Just came across this site and thought you might want to check it out: http://...
+          %p All usernames can be found under the members section.
+          %a.close-reveal-modal ×
         = f.text_area :body, :size => '50x3'
-        %br/
       .field
-        = f.label :tracking, 'Start timer?'
+        = f.label :tracking, 'Enable time-tracking for this item?'
         = f.check_box :tracking
-        %br/
+        %span.has-tip.tip-bottom.tip-left.example-time-tracking{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "You might want to enable time-tracking if your status is 'Working on newsletter design', but not if it's '@all I have pizza in the kitchen!'"} (What's this?)
       .field
         = hidden_field_tag :group_id, @group.id
       .actions
-        = f.submit
+        = f.submit :class => 'button small'
 
   .group-status-list
     - @statuses.each do |message|
@@ -37,10 +57,10 @@
             %span.tracking-label.in-progress= "in progress"
           - if message.tracked? && !(message.tracking?)
             %span.tracking-label.done= "done"
-          %p.body
+          .content
             = auto_link(message.body, :html => {:target => '_blank'}) do |text|
               - truncate(text)
           - if message.user_id == current_user.id
             - if message.tracking?
-              = link_to "Done? Stop timer | ", "#", :class => "group-status-list-item-tracking-link", "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"
+              = link_to "Finish Tracking | ", "#", :class => "update-status-tracking-link", "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"
             = link_to "Delete Status", "#", :class => "delete-status-link", "data-group-id" => "#{@group.id}", "data-status-id" => "#{message.id}"

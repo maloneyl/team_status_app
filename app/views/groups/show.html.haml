@@ -15,9 +15,10 @@
           = render 'agendas'
     .row
       .large-12.columns
-        = will_paginate @statuses
+        = will_paginate @statuses, renderer: FoundationPagination::Rails
+    .row.clear
   - else
-    This is not the group you're looking for...
+    %p This is not the group you're looking for...
 - else
-  Please sign up or sign in.
+  %p Please sign up or sign in.
 

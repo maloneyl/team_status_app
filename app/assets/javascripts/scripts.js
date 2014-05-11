@@ -6,7 +6,7 @@ $(function() {
 
   $(".delete-status-link").on("click", removeStatus);
 
-  $(".group-status-list-item-tracking-link").on("click", updateStatusTracking);
+  $(".update-status-tracking-link").on("click", updateStatusTracking);
 
   // $("#status-form").submit(function(e) {
   //   e.preventDefault();
@@ -62,6 +62,8 @@ $(function() {
     var $this = $(this);
     var groupId = $this.data("group-id");
     var agendaId = $this.data("agenda-id");
+
+    // for re-editing
     if (typeof agendaBodyNewVal == 'undefined') {
       var agendaBody = $this.data("agenda-body");
     } else {
@@ -75,25 +77,34 @@ $(function() {
 
     $("#agenda_body").blur(function() {
       agendaBodyNewVal = $("#agenda_body").val();
-      $this.text(agendaBodyNewVal);
 
-      $.ajax({
-        url: url,
-        type: 'PUT',
-        dataType: "json",
-        data: {
-          agenda: {
-            body: agendaBodyNewVal
+      // update displayed text
+      if (agendaBodyNewVal === "") {
+        $this.html("<div class='content'>(None entered yet.)</div>");
+      } else {
+        $this.html("<div class='content'>" + agendaBodyNewVal + "</div>");
+      }
+
+      // update on server only if agenda actually got changed
+      if (agendaBodyNewVal !== agendaBody) {
+        $.ajax({
+          url: url,
+          type: 'PUT',
+          dataType: "json",
+          data: {
+            agenda: {
+              body: agendaBodyNewVal
+            },
+            group_id: groupId
           },
-          group_id: groupId
-        },
-        success: function() {
-          console.log('Updated!');
-        },
-        error: function() {
-          console.log('Error!');
-        }
-      })
+          success: function() {
+            console.log('Updated!');
+          },
+          error: function() {
+            console.log('Error!');
+          }
+        })
+      }
     });
   };
 
@@ -110,7 +121,7 @@ $(function() {
         dataType: "json",
         success: function() {
           console.log('Removed!');
-          $this.closest(".group-members-list-item-regular").hide();
+          $this.closest("li").hide();
         },
         error: function() {
           console.log('Error!');
@@ -133,7 +144,7 @@ $(function() {
         dataType: "json",
         success: function() {
           console.log('Removed!');
-          $this.closest(".group-status-list-item").hide();
+          $this.closest(".panel").hide();
         },
         error: function() {
           console.log('Error!');
@@ -149,14 +160,14 @@ $(function() {
     var statusId = $this.data('status-id');
     var url = '/groups/' + groupId + '/statuses/' + statusId + '/switch_tracking';
 
-    if (confirm("Are you sure?")) {
+    if (confirm("Are you sure you'd like to stop time-tracking for this status?")) {
       $.ajax({
         url: url,
         type: 'PUT',
         dataType: "json",
         success: function() {
           console.log('Timer stopped!');
-          $this.closest('div').find('.group-status-list-item-in-progress').removeClass().addClass('group-status-list-item-done').text('done');
+          $this.closest('div').find('.in-progress').removeClass().addClass('tracking-label done').text('done');
           $this.hide();
         },
         error: function() {

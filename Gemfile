@@ -18,16 +18,18 @@ gem 'devise'
 
 gem 'chartkick'
 
-gem 'gruff', '~> 0.5.1'
+# gem 'gruff', '~> 0.5.1'
 
-gem 'carrierwave'
-gem 'fog', '~> 1.3.1'
-
-gem 'will_paginate', '~> 3.0'
+# gem 'carrierwave'
+# gem 'fog', '~> 1.3.1'
 
 gem 'rails_autolink', '~> 1.1.5'
 
 gem 'foundation-rails'
+
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-foundation'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
