@@ -5,6 +5,8 @@ application.js: application-c9553dc6d9610fe41adf7bf92e59553d.js
 application/index.js: application-c9553dc6d9610fe41adf7bf92e59553d.js
 application.css: application-363c6dace7188e48dbf5b990067ab7da.css
 application/index.css: application-363c6dace7188e48dbf5b990067ab7da.css
+vendor/modernizr.js: vendor/modernizr-28408cc9a57f7a170c33ffb7e8831088.js
+vendor/modernizr/index.js: vendor/modernizr-28408cc9a57f7a170c33ffb7e8831088.js
 chartkick.js: chartkick-ea7fd0732348acc3581ea75e072bd443.js
 chartkick/index.js: chartkick-ea7fd0732348acc3581ea75e072bd443.js
 jquery.min.map: jquery.min-6336c5bca4c709e809647cdfcb484d0a.map
