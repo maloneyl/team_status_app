@@ -61,8 +61,5 @@ module TeamStatusApp
 
     # Devise setup (if deploying on Heroku with Rails 3.2)
     config.assets.initialize_on_precompile = false
-
-    # Modernizr
-    config.assets.compile = true
   end
 end
